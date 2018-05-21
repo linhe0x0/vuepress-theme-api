@@ -13,6 +13,8 @@ const matchGroupNameFromPath = (path, base) => {
 }
 
 const getTopLevelOfHeaders = headers => {
+  if (!headers.length) return -1
+
   let result = headers[0].level
 
   for (let i = 1, len = headers.length; i < len; i++) {
@@ -50,6 +52,10 @@ export function resolveSidebarItems($page, $site) {
       sidebars[groupName] = {
         children: [],
       }
+    }
+
+    if (item.headers === undefined) {
+      item.headers = []
     }
 
     const maxLevel = getTopLevelOfHeaders(item.headers)
