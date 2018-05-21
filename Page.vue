@@ -123,13 +123,20 @@ export default {
   &__examples
     color: $white
 
-    pre
-      border: 1px solid #333
-      background-color: $black !important
-
     .btn
       margin: 2em 0
 
     p
       font-size: 12px
+
+    // reset style
+    blockquote
+      border-left-color: $white
+
+      p
+        color: #888
+
+    pre
+      border: 1px solid #333
+      background-color: $black !important
 </style>

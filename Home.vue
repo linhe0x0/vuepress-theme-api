@@ -56,6 +56,7 @@ export default {
     font-weight: 400
 
   &__description
+    padding: 0 20%
     margin-bottom: 5rem
     font-size: 18px
     line-height: 24px
