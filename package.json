@@ -1,0 +1,31 @@
+{
+  "name": "vuepress-theme-api",
+  "description": "A api-friendly theme for VuePress.",
+  "version": "0.1.0",
+  "author": "sqrtthree <imsqrtthree@gmail.com>",
+  "homepage": "https://github.com/sqrthree/vuepress-theme-api#readme",
+  "keywords": [
+    "vuepress",
+    "vuepress-theme",
+    "api-friendly",
+    "documentation",
+    "site-generator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sqrthree/vuepress-theme-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sqrthree/vuepress-theme-api/issues"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
