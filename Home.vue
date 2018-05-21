@@ -10,11 +10,16 @@
         <Content custom />
       </div>
     </div>
+    <footer class="home__footer" v-html="footer">
+    </footer>
   </div>
 </template>
 
 <script>
 import Button from './components/Button'
+import MarkdownIt from 'markdown-it'
+
+const md = new MarkdownIt()
 
 export default {
   components: {
@@ -29,6 +34,9 @@ export default {
         link: this.data.actionLink,
         text: this.data.actionText,
       }
+    },
+    footer() {
+      return md.render(this.data.footer)
     },
   },
 }
@@ -55,7 +63,12 @@ export default {
 
   &__body
     justify-content: center
+
   &__content
     padding: 6rem 4rem
     border-top: 1px solid $divider-color
+
+  &__footer
+    margin: 2rem 0
+    text-align: center
 </style>
