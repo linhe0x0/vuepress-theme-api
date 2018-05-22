@@ -63,7 +63,10 @@ export default {
       console.clear()
       console.log('====== DEBUG INFO ======')
       console.info(`=> ${options.method.toUpperCase()} ${options.url}`)
-      console.info('=> Headers:', options.headers)
+
+      if (options.headers) {
+        console.info('=> Headers:', options.headers)
+      }
 
       if (options.params) {
         console.info('=> Params:', options.params)
