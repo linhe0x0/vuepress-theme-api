@@ -68,7 +68,7 @@ export function matchLocalePathFromPath(path, locales) {
 }
 
 export function resolveSidebarItems($page, $site, $localePath) {
-  const { base, pages } = $site
+  const { pages } = $site
 
   const sidebars = {}
 
@@ -78,7 +78,7 @@ export function resolveSidebarItems($page, $site, $localePath) {
       item => matchLocalePathFromPath(item.path, $site.locales) === $localePath
     )
     .forEach(item => {
-      if (isHomePage(item.path, base)) {
+      if (isHomePage(item.path, $localePath)) {
         sidebars[item.title] = {
           title: 'Homepage',
           to: item.path,
@@ -88,7 +88,7 @@ export function resolveSidebarItems($page, $site, $localePath) {
         return
       }
 
-      const groupName = matchGroupNameFromPath(item.path, base)
+      const groupName = matchGroupNameFromPath(item.path, $localePath)
 
       if (!sidebars[groupName]) {
         sidebars[groupName] = {
@@ -103,7 +103,7 @@ export function resolveSidebarItems($page, $site, $localePath) {
       const maxLevel = getTopLevelOfHeaders(item.headers)
 
       // index page in this group
-      if (item.path === base + groupName + '/') {
+      if (item.path === $localePath + groupName + '/') {
         sidebars[groupName].title = item.title
         sidebars[groupName].to = item.path
         sidebars[groupName].headers = item.headers.filter(
