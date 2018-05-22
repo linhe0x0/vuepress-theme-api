@@ -1,8 +1,8 @@
 <template>
   <div class="home__container container">
     <div class="home__header">
-      <h1 class="home__title">{{ data.title || $site.title || 'Hello, World.'}}</h1>
-      <p class="home__description">{{ data.description || $site.description }}</p>
+      <h1 class="home__title">{{ title }}</h1>
+      <p class="home__description">{{ description }}</p>
       <Button :to="action.link">{{ action.text }}</Button>
     </div>
     <div class="home__body row">
@@ -16,8 +16,10 @@
 </template>
 
 <script>
-import Button from './components/Button'
 import MarkdownIt from 'markdown-it'
+
+import { localizePath } from './utils'
+import Button from './components/Button'
 
 const md = new MarkdownIt()
 
@@ -29,10 +31,20 @@ export default {
     data() {
       return this.$page.frontmatter
     },
+    title() {
+      return this.$page.frontmatter.title || this.$title || 'Hello, World.'
+    },
+    description() {
+      return (
+        this.$page.description ||
+        this.$description ||
+        '📦 🎨 A api-friendly theme for VuePress.'
+      )
+    },
     action() {
       return {
-        link: this.data.actionLink,
         text: this.data.actionText,
+        link: localizePath(this.data.actionLink, this.$localePath),
       }
     },
     footer() {

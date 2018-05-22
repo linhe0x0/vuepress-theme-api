@@ -91,6 +91,13 @@ export default {
       nprogress.done()
     })
   },
+  created() {
+    if (this.$ssrContext) {
+      this.$ssrContext.title = this.$title
+      this.$ssrContext.lang = this.$lang
+      this.$ssrContext.description = this.$page.description || this.$description
+    }
+  },
 }
 </script>
 

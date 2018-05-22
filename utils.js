@@ -145,3 +145,7 @@ export function parseQueryString(str) {
 
   return result
 }
+
+export function localizePath(path, localeBase) {
+  return path.startsWith(localeBase) ? path : localeBase + path
+}
