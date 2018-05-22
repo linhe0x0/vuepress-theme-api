@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     sidebarItems() {
-      return resolveSidebarItems(this.$page, this.$site)
+      return resolveSidebarItems(this.$page, this.$site, this.$localePath)
     },
     shouldShowSidebar() {
       const { frontmatter } = this.$page

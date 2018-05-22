@@ -53,51 +53,70 @@ export function isExternalLink(path) {
   return /^(https?:)/.test(path)
 }
 
-export function resolveSidebarItems($page, $site) {
+export function matchLocalePathFromPath(path, locales) {
+  const localeList = Object.keys(locales).filter(item => item !== '/') // omit '/'
+
+  for (let i = 0, len = localeList.length; i < len; i++) {
+    const localePath = localeList[i]
+
+    if (path.startsWith(localePath)) {
+      return localePath
+    }
+  }
+
+  return '/'
+}
+
+export function resolveSidebarItems($page, $site, $localePath) {
   const { base, pages } = $site
 
   const sidebars = {}
 
-  pages.forEach(item => {
-    if (isHomePage(item.path, base)) {
-      sidebars[item.title] = {
-        title: 'Homepage',
-        to: item.path,
-        children: [],
+  pages
+    .filter(
+      // Only show current locales in sidebar
+      item => matchLocalePathFromPath(item.path, $site.locales) === $localePath
+    )
+    .forEach(item => {
+      if (isHomePage(item.path, base)) {
+        sidebars[item.title] = {
+          title: 'Homepage',
+          to: item.path,
+          children: [],
+        }
+
+        return
       }
 
-      return
-    }
+      const groupName = matchGroupNameFromPath(item.path, base)
 
-    const groupName = matchGroupNameFromPath(item.path, base)
-
-    if (!sidebars[groupName]) {
-      sidebars[groupName] = {
-        children: [],
+      if (!sidebars[groupName]) {
+        sidebars[groupName] = {
+          children: [],
+        }
       }
-    }
 
-    if (item.headers === undefined) {
-      item.headers = []
-    }
+      if (item.headers === undefined) {
+        item.headers = []
+      }
 
-    const maxLevel = getTopLevelOfHeaders(item.headers)
+      const maxLevel = getTopLevelOfHeaders(item.headers)
 
-    // index page in this group
-    if (item.path === base + groupName + '/') {
-      sidebars[groupName].title = item.title
-      sidebars[groupName].to = item.path
-      sidebars[groupName].headers = item.headers.filter(
-        item => item.level === maxLevel
-      )
-    } else {
-      sidebars[groupName].children.push({
-        title: item.title || matchFileName(item.path),
-        to: item.path,
-        headers: item.headers.filter(item => item.level === maxLevel),
-      })
-    }
-  })
+      // index page in this group
+      if (item.path === base + groupName + '/') {
+        sidebars[groupName].title = item.title
+        sidebars[groupName].to = item.path
+        sidebars[groupName].headers = item.headers.filter(
+          item => item.level === maxLevel
+        )
+      } else {
+        sidebars[groupName].children.push({
+          title: item.title || matchFileName(item.path),
+          to: item.path,
+          headers: item.headers.filter(item => item.level === maxLevel),
+        })
+      }
+    })
 
   return sidebars
 }
