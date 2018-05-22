@@ -14,7 +14,7 @@
           }
         ]">
           <div class="category__label">
-            <NavLink :to="value.to">{{ value.title || attr}}</NavLink>
+            <NavLink :to="value.to">{{ title(value.title || attr) }}</NavLink>
           </div>
         </div>
 
@@ -28,7 +28,7 @@
           }
         ]">
           <div class="category__label">
-            <NavLink :to="`${value.to}#${header.slug}`">{{ header.title }}</NavLink>
+            <NavLink :to="`${value.to}#${header.slug}`">{{ title(header.title) }}</NavLink>
           </div>
         </div>
 
@@ -42,7 +42,7 @@
           }
         ]">
           <div class="category__label">
-            <NavLink :to="child.to">{{ child.title }}</NavLink>
+            <NavLink :to="child.to">{{ title(child.title) }}</NavLink>
           </div>
           <div v-if="child.headers && child.headers.length" v-for="header in child.headers" :class="[
             'category__headers',
@@ -51,7 +51,7 @@
             }
           ]">
             <div class="category__header-item">
-              <NavLink :to="`${child.to}#${header.slug}`">{{ header.title }}</NavLink>
+              <NavLink :to="`${child.to}#${header.slug}`">{{ title(header.title) }}</NavLink>
             </div>
           </div>
         </div>
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import { title } from '../../utils'
 import NavLink from '../NavLink'
 
 export default {
@@ -73,6 +74,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  methods: {
+    title,
   },
 }
 </script>
