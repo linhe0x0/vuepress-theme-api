@@ -14,7 +14,7 @@
           }
         ]">
           <div class="category__label">
-            <NavLink :to="value.to">{{ value.to === '/' ? 'Homepage' : (value.title || attr) }}</NavLink>
+            <NavLink :to="value.to">{{ value.title || attr}}</NavLink>
           </div>
         </div>
 

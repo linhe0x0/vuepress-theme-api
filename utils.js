@@ -26,6 +26,16 @@ const getTopLevelOfHeaders = headers => {
   return result
 }
 
+const matchFileName = path => {
+  if (/\/$/.test(path)) return 'README'
+
+  const arr = path.split('/')
+
+  if (/\.html$/.test(path)) return arr[arr.length - 1].slice(0, -5)
+
+  return ''
+}
+
 export function isExternalLink(path) {
   return /^(https?:)/.test(path)
 }
@@ -38,7 +48,7 @@ export function resolveSidebarItems($page, $site) {
   pages.forEach(item => {
     if (isHomePage(item.path, base)) {
       sidebars[item.title] = {
-        title: item.title,
+        title: 'Homepage',
         to: item.path,
         children: [],
       }
@@ -69,7 +79,7 @@ export function resolveSidebarItems($page, $site) {
       )
     } else {
       sidebars[groupName].children.push({
-        title: item.title,
+        title: item.title || matchFileName(item.path),
         to: item.path,
         headers: item.headers.filter(item => item.level === maxLevel),
       })
