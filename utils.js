@@ -67,10 +67,35 @@ export function matchLocalePathFromPath(path, locales) {
   return '/'
 }
 
-export function resolveSidebarItems($page, $site, $localePath) {
-  const { pages } = $site
+export function resolveSidebarItems($page, $site, $localePath, $lang) {
+  const { pages, locales } = $site
 
   const sidebars = {}
+
+  sidebars['Other Languages'] = {
+    title: 'other languages',
+    children: Object.keys(locales).map(locale => {
+      const item = locales[locale]
+      let path
+
+      if (item.lang === $lang) {
+        path = $page.path // Stay on the current page
+      } else {
+        path = $page.path.replace($localePath, item.path) // Try to stay on the same page
+
+        const notFound = !$site.pages.some(page => page.path === path)
+
+        if (notFound) {
+          path = item.path // Fallback to homepage
+        }
+      }
+
+      return {
+        title: item.text || item.lang,
+        to: path,
+      }
+    }),
+  }
 
   pages
     .filter(
@@ -165,6 +190,26 @@ export function parseQueryString(str) {
   return result
 }
 
+export function isAbsolute(path) {
+  return path.charAt(0) === '/'
+}
+
+export function normalize(path) {
+  const isAbsolutePath = isAbsolute(path)
+  const trailingSlash = path.substr(-1) === '/'
+
+  let p = path
+    .split('/')
+    .filter(item => !!item)
+    .join('/')
+
+  if (p && trailingSlash) {
+    p += '/'
+  }
+
+  return isAbsolute ? '/' + p : p
+}
+
 export function localizePath(path, localeBase) {
-  return path.startsWith(localeBase) ? path : localeBase + path
+  return path.startsWith(localeBase) ? path : normalize(localeBase + path)
 }
