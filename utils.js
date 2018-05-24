@@ -93,6 +93,7 @@ export function resolveSidebarItems($page, $site, $localePath, $lang) {
       return {
         title: item.text || item.lang,
         to: path,
+        isLangNav: true,
       }
     }),
   }

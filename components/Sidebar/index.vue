@@ -37,8 +37,8 @@
           'group__category',
           'category',
           {
-            'category--selected': $route.path === child.to,
-            'category--active': $route.fullPath === child.to,
+            'category--selected': !child.isLangNav && $route.path === child.to,
+            'category--active': !child.isLangNav && $route.fullPath === child.to,
           }
         ]">
           <div class="category__label">
