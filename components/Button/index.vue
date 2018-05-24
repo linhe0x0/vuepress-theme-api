@@ -65,6 +65,7 @@ export default {
 
 .btn
   position: relative
+  display: inline-block
   padding: 1.5em 6em
   border: 2px solid $black
   font-size: 12px
