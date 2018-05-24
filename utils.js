@@ -68,41 +68,43 @@ export function matchLocalePathFromPath(path, locales) {
 }
 
 export function resolveSidebarItems($page, $site, $localePath, $lang) {
-  const { pages, locales } = $site
-
   const sidebars = {}
 
-  sidebars['Other Languages'] = {
-    title: 'other languages',
-    children: Object.keys(locales).map(locale => {
-      const item = locales[locale]
-      let path
+  if ($site.locales) {
+    sidebars['Other Languages'] = {
+      title: 'other languages',
+      children: Object.keys($site.locales).map(locale => {
+        const item = $site.locales[locale]
+        let path
 
-      if (item.lang === $lang) {
-        path = $page.path // Stay on the current page
-      } else {
-        path = $page.path.replace($localePath, item.path) // Try to stay on the same page
+        if (item.lang === $lang) {
+          path = $page.path // Stay on the current page
+        } else {
+          path = $page.path.replace($localePath, item.path) // Try to stay on the same page
 
-        const notFound = !$site.pages.some(page => page.path === path)
+          const notFound = !$site.pages.some(page => page.path === path)
 
-        if (notFound) {
-          path = item.path // Fallback to homepage
+          if (notFound) {
+            path = item.path // Fallback to homepage
+          }
         }
-      }
 
-      return {
-        title: item.text || item.lang,
-        to: path,
-        isLangNav: true,
-      }
-    }),
+        return {
+          title: item.text || item.lang,
+          to: path,
+          isLangNav: true,
+        }
+      }),
+    }
   }
 
-  pages
-    .filter(
+  $site.pages
+    .filter(item => {
       // Only show current locales in sidebar
-      item => matchLocalePathFromPath(item.path, $site.locales) === $localePath
-    )
+      return $site.locales
+        ? matchLocalePathFromPath(item.path, $site.locales) === $localePath
+        : true
+    })
     .forEach(item => {
       if (isHomePage(item.path, $localePath)) {
         sidebars[item.title] = {
