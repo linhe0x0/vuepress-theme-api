@@ -213,6 +213,14 @@ export function normalize(path) {
   return isAbsolute ? '/' + p : p
 }
 
+export function padTrailingSlash(path) {
+  return path.endsWith('/') ? path : path + '/'
+}
+
 export function localizePath(path, localeBase) {
-  return path.startsWith(localeBase) ? path : normalize(localeBase + path)
+  const result = path.startsWith(localeBase)
+    ? path
+    : normalize(localeBase + path)
+
+  return padTrailingSlash(result)
 }

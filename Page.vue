@@ -135,8 +135,4 @@ export default {
 
       p
         color: #888
-
-    pre
-      border: 1px solid #333
-      background-color: $black !important
 </style>

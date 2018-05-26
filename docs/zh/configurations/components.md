@@ -76,15 +76,17 @@ Some examples...
 
 例如下面的内容将会渲染成右侧的形式：
 
-    <CURL>
-    ```bash
-    curl -X POST http://api.example.com/api/auth/login \
-      --data '{
-        "username": "my-username",
-        "password": "my-password"
-      }'
-    ```
-    </CURL>
+````vue
+<CURL>
+```bash
+curl -X POST http://api.example.com/api/auth/login \
+  --data '{
+    "username": "my-username",
+    "password": "my-password"
+  }'
+```
+</CURL>
+````
 
 `CURL` 组件会在组件下方自动生成一个按钮，当点击按钮时，会通过分析 `curl` 命令内的参数，通过 `JS` 发送请求到对应的地址上。并将其请求信息输出到浏览器开发者工具中的控制台上。方便进行快速测试和预览。
 

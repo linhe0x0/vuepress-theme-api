@@ -96,7 +96,7 @@ footer: Open Source on [GitHub](https://github.com/sqrthree/vuepress-theme-api),
 
 文档页默认采用普通形式（通栏）的布局结构，例如 [起步页面](/zh/getting-started/)。同时得益于 `VuePress` 的 [组件支持特性](https://vuepress.vuejs.org/zh/guide/using-vue.html#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-api-%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6)，我们可以在 Markdown 文件中直接使用 Vue 组件。因此，我们可以轻松构造出本页面这种 `RESTful API` 友好的页面布局。
 
-要使用这种布局，需要了解主题内提供的几个组件。具体使用方式请参考 [内置组件](zh/configurations/components.html)。
+要使用这种布局，需要了解主题内提供的几个组件。具体使用方式请参考 [内置组件](/zh/configurations/components.html)。
 
 如果你觉得内置组件过于繁琐，也可以通过在文件顶部的 `YAML front matter` 中配置 `enhance: true` 启用**增强模式**。
 

@@ -22,6 +22,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "dev": "npm run docs:dev",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:serve": "serve --single docs/.vuepress/dist",

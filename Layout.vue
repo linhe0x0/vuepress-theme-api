@@ -28,7 +28,6 @@
 <script>
 import Vue from 'vue'
 import nprogress from 'nprogress'
-import { pathToComponentName } from '@app/util'
 
 import Sidebar from './components/Sidebar'
 import Home from './Home'
@@ -82,10 +81,7 @@ export default {
     nprogress.configure({ showSpinner: false })
 
     this.$router.beforeEach((to, from, next) => {
-      if (
-        to.path !== from.path &&
-        !Vue.component(pathToComponentName(to.path))
-      ) {
+      if (to.path !== from.path && !Vue.component(to.name)) {
         nprogress.start()
       }
 
