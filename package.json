@@ -28,6 +28,7 @@
     "docs:serve": "serve --single docs/.vuepress/dist",
     "docs:clean": "rm -r docs/.vuepress/dist",
     "lint": "prettier --list-different --write '**/*.{js,vue}'",
+    "deploy": "npm run docs:build && gh-pages -d docs/.vuepress/dist",
     "test": "prettier --list-different '**/*.{js,vue}'"
   },
   "license": "MIT",
@@ -35,6 +36,7 @@
     "axios": "^0.18.0"
   },
   "devDependencies": {
+    "gh-pages": "^1.1.0",
     "prettier": "^1.12.1"
   }
 }
