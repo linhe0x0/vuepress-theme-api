@@ -27,10 +27,14 @@
     "docs:build": "vuepress build docs",
     "docs:serve": "serve --single docs/.vuepress/dist",
     "docs:clean": "rm -r docs/.vuepress/dist",
+    "lint": "prettier --list-different --write '**/*.{js,vue}'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.12.1"
   }
 }
