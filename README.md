@@ -1,10 +1,14 @@
 # vuepress-theme-api
 
+[![npm](https://img.shields.io/npm/v/vuepress-theme-api.svg)](https://www.npmjs.com/package/vuepress-theme-api)
+[![npm](https://img.shields.io/npm/l/vuepress-theme-api.svg)](https://github.com/sqrthree/vuepress-theme-api/blob/master/LICENSE)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+
 > 📦 📝 🎨 A api-friendly theme for VuePress.
 
-![image](https://user-images.githubusercontent.com/8622362/40341249-9b6e8b9e-5db6-11e8-97f5-41cadc87ce51.png)
-
 [Live demo](https://blog.sqrtthree.com/vuepress-theme-api/)
+
+![image](https://user-images.githubusercontent.com/8622362/40341249-9b6e8b9e-5db6-11e8-97f5-41cadc87ce51.png)
 
 ## Built With
 
