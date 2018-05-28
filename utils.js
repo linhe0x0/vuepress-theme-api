@@ -67,7 +67,7 @@ export function matchLocalePathFromPath(path, locales) {
   return '/'
 }
 
-export function resolveSidebarItems($page, $site, $localePath, $lang) {
+export function resolveSidebarItems($page, $site, $localePath) {
   const sidebars = {}
 
   if ($site.locales) {
@@ -77,7 +77,7 @@ export function resolveSidebarItems($page, $site, $localePath, $lang) {
         const item = $site.locales[locale]
         let path
 
-        if (item.lang === $lang) {
+        if (item.path === $localePath) {
           path = $page.path // Stay on the current page
         } else {
           path = $page.path.replace($localePath, item.path) // Try to stay on the same page
