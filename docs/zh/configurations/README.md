@@ -88,6 +88,153 @@ footer: Open Source on [GitHub](https://github.com/sqrthree/vuepress-theme-api),
 - 检索该目录下的其他文件，作为该分组的剩余导航项；
 - 分析文件中的最 `top` 级标题，做为该文件对应的导航项中的子导航项（默认折叠）。
 
+### 自定义侧边栏
+
+如果不满意默认的侧边栏，你也可以通过配置 `themeConfig.sidebar` 来控制侧边栏。
+
+配置时 `themeConfig.sidebar` 的值请参考以下结构：
+
+```js
+themeConfig: {
+  sidebar: {
+    '分组名称': {
+      title: '基本配置', // 导航项文字。
+      to: '/zh/configurations/', // 导航项链接地址。
+
+      // 该分组下的其他导航项，默认展示。
+      children: [
+        {
+          title: '内置组件',
+          to: '/zh/configurations/components.html',
+
+          // 该导航项所包含的子导航项，默认被折叠。用于展示某个页面的所有标题导航。
+          headers: [
+            {
+              title: 'Block 组件',
+              slug: 'block-组件', // 当前页面的 id 锚点。
+            },
+          ],
+        },
+      ],
+    },
+  },
+},
+```
+
+如果有多语言配置需求，可以配置 `themeConfig.locales[LANG].sidebar` 项：
+
+```js
+themeConfig: {
+  locales: {
+    '/': {
+      sidebar: {
+        'getting-started': {
+          title: 'Getting Started',
+          to: '/getting-started/',
+          children: [],
+        },
+      },
+    },
+    '/zh/': {
+      '分组名称': {
+        title: '基本配置', // 导航项文字。
+        to: '/zh/configurations/', // 导航项链接地址。
+
+        // 该分组下的其他导航项，默认展示。
+        children: [
+          {
+            title: '内置组件',
+            to: '/zh/configurations/components.html',
+
+            // 该导航项所包含的子导航项，默认被折叠。用于展示某个页面的所有标题导航。
+            headers: [
+              {
+                title: 'Block 组件',
+                slug: 'block-组件', // 当前页面的 id 锚点。
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+},
+```
+
+<Example>
+
+自定义导航：
+
+```js
+// .vuepress/config.js
+themeConfig: {
+  sidebar: {
+    "configurations": {
+      "title": "基本配置",
+      "to": "/zh/configurations/",
+      "children": [
+        {
+          "title": "内置组件",
+          "to": "/zh/configurations/components.html",
+          "headers": [
+            {
+              "title": "Block 组件",
+              "slug": "block-组件"
+            },
+          ]
+        },
+        {
+          "title": "文件模板",
+          "to": "/zh/configurations/template.html",
+          "headers": []
+        }
+      ],
+    },
+  }
+}
+```
+
+多语言下的自定义导航：
+
+```js
+// .vuepress/config.js
+themeConfig: {
+  locales: {
+    '/': {
+      sidebar: {
+        'getting-started': {
+          title: 'Getting Started',
+          to: '/getting-started/',
+          children: [],
+        },
+      },
+    },
+    '/zh/': {
+      sidebar: {
+        '分组名称': {
+          title: '基本配置',
+          to: '/zh/configurations/',
+          children: [
+            {
+              title: '内置组件',
+              to: '/zh/configurations/components.html',
+              headers: [
+                {
+                  title: 'Block 组件',
+                  slug: 'block-组件',
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  },
+},
+```
+
+</Example>
+
 </Block>
 
 <Block>

@@ -68,6 +68,7 @@ export function matchLocalePathFromPath(path, locales) {
 }
 
 export function resolveSidebarItems($page, $site, $localePath) {
+  const { themeConfig } = $site
   const sidebars = {}
 
   if ($site.locales) {
@@ -96,6 +97,17 @@ export function resolveSidebarItems($page, $site, $localePath) {
         }
       }),
     }
+  }
+
+  const sidebarConfig =
+    themeConfig.locales &&
+    themeConfig.locales[$localePath] &&
+    themeConfig.locales[$localePath].sidebar
+      ? themeConfig.locales[$localePath].sidebar
+      : themeConfig.sidebar
+
+  if (sidebarConfig) {
+    return Object.assign(sidebars, sidebarConfig)
   }
 
   $site.pages
