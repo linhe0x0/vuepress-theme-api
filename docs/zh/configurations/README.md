@@ -82,13 +82,49 @@ footer: Open Source on [GitHub](https://github.com/sqrthree/vuepress-theme-api),
 
 侧边栏的生成规则如下：
 
-- 检索目录，按照目录进行分组；
+- 检索目录，按照 **目录/文件夹** 进行分组；
 - 如果目录下有 `README.md` 文件，则读取其标题作为该分组下第一个导航项。如果文件 `YAML front matter` 中配置了 `title` 项，会采用其值作为标题，否则分析出文章中的第一个标题作为文章标题。如果存在该文件但未配置其标题，则降级为文件目录作为其标题；
 - 分析出文章中的所有最 `top` 级标题，作为该分组的导航项；
 - 检索该目录下的其他文件，作为该分组的剩余导航项；
 - 分析文件中的最 `top` 级标题，做为该文件对应的导航项中的子导航项（默认折叠）。
 
-### 自定义侧边栏
+### 自定义侧边栏顺序
+
+默认情况下，导航栏的分组是按照文件夹首字母排序的，有时候可能不是你想要的顺序，这时，你可以通过配置 `themeConfig.sidebarGroupOrder` 来控制侧边栏的排序方式。
+
+配置的方式如下：
+
+```js
+themeConfig: {
+  sidebarGroupOrder: [
+    'getting-started', // 分组名称，即文件夹名称
+    'configurations'
+  ],
+}
+```
+
+如果有多语言配置需求，可以配置 `themeConfig.locales[LANG].sidebarGroupOrder` 项：
+
+```js
+themeConfig: {
+  locales: {
+    '/': {
+      sidebarGroupOrder: [
+        'getting-started',
+        'configurations',
+      ]
+    },
+    '/zh/': {
+      sidebarGroupOrder: [
+        'getting-started',
+        'configurations',
+      ]
+    },
+  },
+},
+```
+
+### 自定义侧边栏内容
 
 如果不满意默认的侧边栏，你也可以通过配置 `themeConfig.sidebar` 来控制侧边栏。
 
@@ -163,38 +199,72 @@ themeConfig: {
 
 <Example>
 
-自定义导航：
+### 自定义侧边栏顺序：
+
+```js
+// .vuepress/config.js
+themeConfig: {
+  sidebarGroupOrder: [
+    'getting-started', // 分组名称，即文件夹名称
+    'configurations'
+  ],
+}
+```
+
+多语言下的自定义侧边栏顺序：
+
+```js
+// .vuepress/config.js
+themeConfig: {
+  locales: {
+    '/': {
+      sidebarGroupOrder: [
+        'getting-started',
+        'configurations',
+      ]
+    },
+    '/zh/': {
+      sidebarGroupOrder: [
+        'getting-started',
+        'configurations',
+      ]
+    },
+  },
+}
+```
+
+### 自定义侧边栏内容：
 
 ```js
 // .vuepress/config.js
 themeConfig: {
   sidebar: {
-    "configurations": {
-      "title": "基本配置",
-      "to": "/zh/configurations/",
-      "children": [
+    configurations: {
+      title: '基本配置',
+      to: '/zh/configurations/',
+      children: [
         {
-          "title": "内置组件",
-          "to": "/zh/configurations/components.html",
-          "headers": [
+          title: '内置组件',
+          to: '/zh/configurations/components.html',
+          headers: [
             {
-              "title": "Block 组件",
-              "slug": "block-组件"
-            },
+              title: 'Block 组件',
+              slug: 'block-组件'
+            }
           ]
         },
         {
-          "title": "文件模板",
-          "to": "/zh/configurations/template.html",
-          "headers": []
+          title: '文件模板',
+          to: '/zh/configurations/template.html',
+          headers: []
         }
-      ],
-    },
+      ]
+    }
   }
 }
 ```
 
-多语言下的自定义导航：
+多语言下的自定义侧边栏内容：
 
 ```js
 // .vuepress/config.js

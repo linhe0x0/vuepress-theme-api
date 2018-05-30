@@ -17,4 +17,10 @@ module.exports = {
       description: '📦 🎨 一个面向 RESTful API 设计的开箱即用主题。',
     },
   },
+  themeConfig: {
+    sidebarGroupOrder: [
+      'getting-started',
+      'configurations'
+    ],
+  },
 }

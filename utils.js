@@ -72,7 +72,7 @@ export function resolveSidebarItems($page, $site, $localePath) {
   const sidebars = {}
 
   if ($site.locales) {
-    sidebars['Other Languages'] = {
+    sidebars['other-languages'] = {
       title: 'other languages',
       children: Object.keys($site.locales).map(locale => {
         const item = $site.locales[locale]
@@ -119,7 +119,7 @@ export function resolveSidebarItems($page, $site, $localePath) {
     })
     .forEach(item => {
       if (isHomePage(item.path, $localePath)) {
-        sidebars[item.title] = {
+        sidebars['home'] = {
           title: 'Homepage',
           to: item.path,
           children: [],
