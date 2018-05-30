@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/l/vuepress-theme-api.svg)](https://github.com/sqrthree/vuepress-theme-api/blob/master/LICENSE)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-> 📦 📝 🎨 A api-friendly theme for VuePress.
+> 📦 📝 🎨 A api-friendly theme for VuePress. Inspired by [zeit](https://zeit.co/docs).
 
 [Live demo](https://blog.sqrtthree.com/vuepress-theme-api/)
 
