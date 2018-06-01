@@ -50,7 +50,7 @@ export function title(str) {
 }
 
 export function isExternalLink(path) {
-  return /^(https?:)/.test(path)
+  return /^(https?:|mailto:|tel:)/.test(path)
 }
 
 export function matchLocalePathFromPath(path, locales) {
