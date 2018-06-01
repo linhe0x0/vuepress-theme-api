@@ -33,6 +33,8 @@ export default {
   },
   mounted() {
     this.resolveLayout()
+
+    this.$parent.$parent.$emit('addBlock', this)
   },
 }
 </script>

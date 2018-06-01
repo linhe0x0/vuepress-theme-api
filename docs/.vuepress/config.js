@@ -18,6 +18,7 @@ module.exports = {
     },
   },
   themeConfig: {
+    lastUpdated: 'Last Updated', // string | boolean
     sidebarGroupOrder: [
       'getting-started',
       'configurations'
