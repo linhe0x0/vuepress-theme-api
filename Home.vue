@@ -48,7 +48,10 @@ export default {
       }
     },
     footer() {
-      return md.render(this.data.footer)
+      const defaultFooter =
+        'Open Source on [GitHub](https://github.com/sqrthree/vuepress-theme-api), Made by [@sqrthree](https://github.com/sqrthree), Power by [vuepress](https://github.com/vuejs/vuepress).'
+
+      return md.render(this.data.footer || defaultFooter)
     },
   },
 }
