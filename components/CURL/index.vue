@@ -34,7 +34,9 @@ export default {
       const options = curl(cmd)
 
       if (!options) {
-        this.$message.error('Got an invalid CURL command, please check it and try again.')
+        this.$message.error(
+          'Got an invalid CURL command, please check it and try again.'
+        )
         return
       }
 

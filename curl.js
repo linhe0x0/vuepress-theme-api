@@ -1,6 +1,6 @@
 import { isJSON, isQueryString, parseQueryString } from './utils'
 
-const parseField = (s) => {
+const parseField = s => {
   return s.split(/: (.+)/)
 }
 
@@ -32,44 +32,45 @@ export default function curl(cmd) {
 
   let state = ''
 
-  args.forEach(function(arg){
+  args.forEach(function(arg) {
     switch (true) {
       case isURL(arg):
         result.url = arg
-        break;
 
-      case arg == '-A' || arg == '--user-agent':
+        break
+      case arg === '-A' || arg === '--user-agent':
         state = 'user-agent'
-        break;
 
-      case arg == '-H' || arg == '--header':
+        break
+      case arg === '-H' || arg === '--header':
         state = 'header'
-        break;
 
-      case arg == '-d' || arg == '--data' || arg == '--data-ascii':
+        break
+      case arg === '-d' || arg === '--data' || arg === '--data-ascii':
         state = 'data'
-        break;
 
-      case arg == '-u' || arg == '--user':
+        break
+      case arg === '-u' || arg === '--user':
         state = 'user'
-        break;
 
-      case arg == '-I' || arg == '--head':
+        break
+      case arg === '-I' || arg === '--head':
         result.method = 'HEAD'
-        break;
 
-      case arg == '-X' || arg == '--request':
+        break
+      case arg === '-X' || arg === '--request':
         state = 'method'
-        break;
 
-      case arg == '-b' || arg =='--cookie':
+        break
+      case arg === '-b' || arg === '--cookie':
         state = 'cookie'
-        break;
 
-      case arg == '--compressed':
-        result.headers['Accept-Encoding'] = result.headers['Accept-Encoding'] || 'deflate, gzip'
-        break;
+        break
+      case arg === '--compressed':
+        result.headers['Accept-Encoding'] =
+          result.headers['Accept-Encoding'] || 'deflate, gzip'
 
+        break
       case !!arg:
         // Delete the start position and the end of the quotation mark
         if (/^['"]/.test(arg)) {
@@ -78,20 +79,27 @@ export default function curl(cmd) {
 
         switch (state) {
           case 'header':
-            var field = parseField(arg)
+            const field = parseField(arg)
+
             result.headers[field[0]] = field[1]
             state = ''
-            break;
+
+            break
           case 'user-agent':
             result.headers['User-Agent'] = arg
             state = ''
-            break;
+
+            break
           case 'data':
-            if (result.method.toUpperCase() === 'GET' || result.method.toUpperCase() === 'HEAD') {
+            if (
+              result.method.toUpperCase() === 'GET' ||
+              result.method.toUpperCase() === 'HEAD'
+            ) {
               result.method = 'POST'
             }
 
-            result.headers['Content-Type'] = result.headers['Content-Type'] || 'application/json'
+            result.headers['Content-Type'] =
+              result.headers['Content-Type'] || 'application/json'
 
             if (isJSON(arg)) {
               const data = JSON.parse(arg)
@@ -100,27 +108,29 @@ export default function curl(cmd) {
                 ? Object.assign(result.data, data)
                 : data
             } else if (isQueryString(arg)) {
-              result.data = result.data
-                ? result.data + '&' + arg
-                : arg
+              result.data = result.data ? result.data + '&' + arg : arg
             }
 
             state = ''
-            break;
+
+            break
           case 'user':
             result.headers['Authorization'] = 'Basic ' + btoa(arg)
             state = ''
-            break;
+
+            break
           case 'method':
             result.method = arg.toLowerCase()
             state = ''
-            break;
+
+            break
           case 'cookie':
             result.headers['Set-Cookie'] = arg
             state = ''
-            break;
+
+            break
         }
-        break;
+        break
     }
   })
 
