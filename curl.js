@@ -1,56 +1,7 @@
-const normalize = args => {
-  const shortMap = {
-    X: 'request',
-    A: 'user-agent',
-    e: 'referer',
-    G: 'get',
-    F: 'form',
-    H: 'header',
-    d: 'data',
-  }
+import { isJSON, isQueryString, parseQueryString } from './utils'
 
-  const result = []
-
-  args.forEach((item, index) => {
-    if (isURL(item)) {
-      result.push('--url', item)
-    } else if (item.length > 1 && item[0] === '-' && item[1] !== '-') {
-      result.push(`--${shortMap[item.substring(1)]}`)
-    } else if (/^[\'\"](.*\s*)*[\'\"]$/.test(item)) {
-      result.push(item.slice(1, -1))
-    } else {
-      result.push(item)
-    }
-  })
-
-  return result
-}
-
-const parseOptions = args => {
-  const result = {}
-  let lastOption = ''
-
-  args.forEach(item => {
-    if (/^--/.test(item)) {
-      lastOption = item.substring(2)
-    } else if (parametersSupportingMultipleValues.includes(lastOption)) {
-      if (!result[lastOption]) {
-        result[lastOption] = []
-      }
-
-      result[lastOption].push(item)
-    } else {
-      result[lastOption] = item
-    }
-  })
-
-  return result
-}
-
-export const parametersSupportingMultipleValues = ['header']
-
-export function isCURL(cmd) {
-  return cmd.startsWith('curl')
+const parseField = (s) => {
+  return s.split(/: (.+)/)
 }
 
 export function isURL(url) {
@@ -63,22 +14,114 @@ export function isURL(url) {
   return urlRegexp.test(url) || localhost.test(url)
 }
 
-export function resolveArgs(cmd) {
-  const rawArgs = cmd.substring(5)
-  const argsList = rawArgs
+export function isCURL(cmd) {
+  return cmd.startsWith('curl ')
+}
+
+export default function curl(cmd) {
+  if (!isCURL(cmd)) return
+
+  const args = cmd
     .match(/"[^"]+"|'[^']+'|\S+/g)
     .filter(item => item.trim() !== '\\')
 
-  return parseOptions(normalize(argsList))
-}
+  const result = {
+    method: 'GET',
+    headers: {},
+  }
 
-export function resolveHeaders(headers) {
-  const result = {}
+  let state = ''
 
-  headers.forEach(item => {
-    const [attr, value] = item.split(':')
+  args.forEach(function(arg){
+    switch (true) {
+      case isURL(arg):
+        result.url = arg
+        break;
 
-    result[attr.trim()] = value.trim()
+      case arg == '-A' || arg == '--user-agent':
+        state = 'user-agent'
+        break;
+
+      case arg == '-H' || arg == '--header':
+        state = 'header'
+        break;
+
+      case arg == '-d' || arg == '--data' || arg == '--data-ascii':
+        state = 'data'
+        break;
+
+      case arg == '-u' || arg == '--user':
+        state = 'user'
+        break;
+
+      case arg == '-I' || arg == '--head':
+        result.method = 'HEAD'
+        break;
+
+      case arg == '-X' || arg == '--request':
+        state = 'method'
+        break;
+
+      case arg == '-b' || arg =='--cookie':
+        state = 'cookie'
+        break;
+
+      case arg == '--compressed':
+        result.headers['Accept-Encoding'] = result.headers['Accept-Encoding'] || 'deflate, gzip'
+        break;
+
+      case !!arg:
+        // Delete the start position and the end of the quotation mark
+        if (/^['"]/.test(arg)) {
+          arg = arg.slice(1, -1)
+        }
+
+        switch (state) {
+          case 'header':
+            var field = parseField(arg)
+            result.headers[field[0]] = field[1]
+            state = ''
+            break;
+          case 'user-agent':
+            result.headers['User-Agent'] = arg
+            state = ''
+            break;
+          case 'data':
+            if (result.method.toUpperCase() === 'GET' || result.method.toUpperCase() === 'HEAD') {
+              result.method = 'POST'
+            }
+
+            result.headers['Content-Type'] = result.headers['Content-Type'] || 'application/json'
+
+            if (isJSON(arg)) {
+              const data = JSON.parse(arg)
+
+              result.data = result.data
+                ? Object.assign(result.data, data)
+                : data
+            } else if (isQueryString(arg)) {
+              result.data = result.data
+                ? result.data + '&' + arg
+                : arg
+            }
+
+            state = ''
+            break;
+          case 'user':
+            result.headers['Authorization'] = 'Basic ' + btoa(arg)
+            state = ''
+            break;
+          case 'method':
+            result.method = arg.toLowerCase()
+            state = ''
+            break;
+          case 'cookie':
+            result.headers['Set-Cookie'] = arg
+            state = ''
+            break;
+        }
+        break;
+    }
   })
 
   return result

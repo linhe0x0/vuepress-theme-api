@@ -12,7 +12,7 @@ import nprogress from 'nprogress'
 
 import request from '../../request'
 import { isJSON, isQueryString, parseQueryString } from '../../utils'
-import { isCURL, resolveArgs, resolveHeaders } from '../../curl'
+import curl from '../../curl'
 
 // configure progress bar
 nprogress.configure({ showSpinner: false })
@@ -29,35 +29,13 @@ export default {
     sendRequest() {
       const cmd = this.$refs.curl.outerText.trim()
 
-      if (!isCURL(cmd)) return
-
       if (this.loading) return
 
-      const args = resolveArgs(cmd)
+      const options = curl(cmd)
 
-      const options = {
-        url: args.url,
-        method: args.request ? args.request.toLowerCase() : 'get',
-      }
-
-      if (args.header) {
-        options.headers = resolveHeaders(args.header)
-      }
-
-      if (args.data) {
-        let data
-
-        if (isJSON(args.data)) {
-          data = JSON.parse(args.data)
-        } else if (isQueryString(args.data)) {
-          data = parseQueryString(args.data)
-        }
-
-        if (options.method === 'get' || options.method === 'delete') {
-          options.params = data
-        } else {
-          options.data = data
-        }
+      if (!options) {
+        this.$message.error('Got an invalid CURL command, please check it and try again.')
+        return
       }
 
       console.clear()
