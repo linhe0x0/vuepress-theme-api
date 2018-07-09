@@ -167,7 +167,7 @@ export default {
 
 .page__container
   min-height: 100vh
-  padding: 4rem 3rem 0
+  padding: 4rem 6rem 0
 
   .curl__container
     text-align: center
@@ -198,7 +198,7 @@ export default {
     background-color: #fafafa
 
 .content-block
-  margin: -4rem -3rem 4rem
+  margin: -4rem -6rem 4rem
   background-color: $black
 
   &:last-child
