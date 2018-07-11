@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import config from '../../config'
 import { title } from '../../utils'
 import NavLink from '../NavLink'
 
@@ -77,14 +78,7 @@ export default {
   },
   computed: {
     sidebarGroupOrder() {
-      const { themeConfig } = this.$site
-
-      const groupOrderConfig =
-        themeConfig.locales &&
-        themeConfig.locales[this.$localePath] &&
-        themeConfig.locales[this.$localePath].sidebarGroupOrder
-          ? themeConfig.locales[this.$localePath].sidebarGroupOrder
-          : themeConfig.sidebarGroupOrder
+      const groupOrderConfig = config.get(this.$site, 'sidebarGroupOrder', this.$localePath)
 
       if (groupOrderConfig) {
         const result = groupOrderConfig.slice()
