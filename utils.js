@@ -1,3 +1,5 @@
+import config from './config'
+
 const isHomePage = (path, base) => {
   return path === base
 }
@@ -99,12 +101,7 @@ export function resolveSidebarItems($page, $site, $localePath) {
     }
   }
 
-  const sidebarConfig =
-    themeConfig.locales &&
-    themeConfig.locales[$localePath] &&
-    themeConfig.locales[$localePath].sidebar
-      ? themeConfig.locales[$localePath].sidebar
-      : themeConfig.sidebar
+  const sidebarConfig = config.get($site, 'sidebar', $localePath)
 
   if (sidebarConfig) {
     return Object.assign(sidebars, sidebarConfig)
