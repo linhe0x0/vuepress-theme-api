@@ -78,7 +78,11 @@ export default {
   },
   computed: {
     sidebarGroupOrder() {
-      const groupOrderConfig = config.get(this.$site, 'sidebarGroupOrder', this.$localePath)
+      const groupOrderConfig = config.get(
+        this.$site,
+        'sidebarGroupOrder',
+        this.$localePath
+      )
 
       if (groupOrderConfig) {
         const result = groupOrderConfig.slice()
