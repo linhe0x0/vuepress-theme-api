@@ -353,7 +353,7 @@ enhance: true
 
 本站使用的配置：
 
-```js{6-19}
+```js{6-31}
 module.exports = {
   title: 'Hello, World.',
   description: '📦 🎨 A api-friendly theme for VuePress.',
@@ -373,6 +373,18 @@ module.exports = {
       description: '📦 🎨 一个面向 RESTful API 设计的开箱即用主题。',
     },
   },
+  themeConfig: {
+    locales: {
+      '/': {
+        selectText: 'Languages',
+        label: 'English',
+      },
+      '/zh/': {
+        selectText: '选择语言',
+        label: '简体中文',
+      }
+    }
+  }
 }
 
 ```
