@@ -72,13 +72,23 @@ export function matchLocalePathFromPath(path, locales) {
 export function resolveSidebarItems($page, $site, $localePath) {
   const { themeConfig } = $site
   const sidebars = {}
+  let languageSelectText
 
   if ($site.locales) {
-    sidebars['other-languages'] = {
-      title: 'other languages',
+    let localeTheme = {};
+    
+    if (themeConfig.locales) {
+      localeTheme = themeConfig.locales[$localePath]
+    }
+
+    languageSelectText = localeTheme.selectText || 'other-languages'
+
+    sidebars[languageSelectText] = {
+      title: languageSelectText,
       children: Object.keys($site.locales).map(locale => {
         const item = $site.locales[locale]
         let path
+        let languageTitle = item.text || item.lang
 
         if (item.path === $localePath) {
           path = $page.path // Stay on the current page
@@ -92,8 +102,12 @@ export function resolveSidebarItems($page, $site, $localePath) {
           }
         }
 
+        if(themeConfig.locales && themeConfig.locales[locale] && themeConfig.locales[locale].label) {
+          languageTitle = themeConfig.locales[locale].label
+        }
+
         return {
-          title: item.text || item.lang,
+          title: languageTitle,
           to: path,
           isLangNav: true,
         }
