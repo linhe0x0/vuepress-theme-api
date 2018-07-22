@@ -75,20 +75,14 @@ export function resolveSidebarItems($page, $site, $localePath) {
   let languageSelectText
 
   if ($site.locales) {
-    let localeTheme = {};
-
-    if (themeConfig.locales) {
-      localeTheme = themeConfig.locales[$localePath]
-    }
-
-    languageSelectText = localeTheme.selectText || 'languages'
+    languageSelectText = config.get($site, 'selectText', $localePath) || 'languages'
 
     sidebars[languageSelectText] = {
       title: languageSelectText,
       children: Object.keys($site.locales).map(locale => {
         const item = $site.locales[locale]
+        let languageTitle = config.get($site, 'label', locale) || item.text || item.lang
         let path
-        let languageTitle = item.text || item.lang
 
         if (item.path === $localePath) {
           path = $page.path // Stay on the current page
@@ -100,10 +94,6 @@ export function resolveSidebarItems($page, $site, $localePath) {
           if (notFound) {
             path = item.path // Fallback to homepage
           }
-        }
-
-        if(themeConfig.locales && themeConfig.locales[locale] && themeConfig.locales[locale].label) {
-          languageTitle = themeConfig.locales[locale].label
         }
 
         return {
