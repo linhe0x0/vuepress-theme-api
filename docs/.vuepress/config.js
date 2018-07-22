@@ -18,6 +18,17 @@ module.exports = {
     },
   },
   themeConfig: {
+    locales: {
+      '/': {
+        selectText: 'Languages',
+        label: 'English',
+      },
+      '/zh/': {
+        selectText: '选择语言',
+        label: '简体中文',
+      },
+    },
+
     // Assumes GitHub. Can also be a full GitLab url.
     repo: 'sqrthree/vuepress-theme-api',
     // Customising the header label

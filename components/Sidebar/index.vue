@@ -84,10 +84,13 @@ export default {
         this.$localePath
       )
 
+      const langTitle = config.get(this.$site, 'selectText', this.$localePath) || 'other-languages'
+
       if (groupOrderConfig) {
         const result = groupOrderConfig.slice()
 
-        result.unshift('other-languages', 'home')
+        result.unshift(langTitle, 'home')
+
         return result
       } else {
         return Object.keys(this.items)
