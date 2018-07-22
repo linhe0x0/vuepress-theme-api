@@ -76,12 +76,12 @@ export function resolveSidebarItems($page, $site, $localePath) {
 
   if ($site.locales) {
     let localeTheme = {};
-    
+
     if (themeConfig.locales) {
       localeTheme = themeConfig.locales[$localePath]
     }
 
-    languageSelectText = localeTheme.selectText || 'other-languages'
+    languageSelectText = localeTheme.selectText || 'languages'
 
     sidebars[languageSelectText] = {
       title: languageSelectText,
