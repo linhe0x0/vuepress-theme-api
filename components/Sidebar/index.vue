@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <div class="group" v-for="sidebarGroupItem, index in sidebars">
+    <div class="group" v-for="sidebarGroupItem, index in sidebars" v-if="sidebarGroupItem">
       <div class="group__title">{{ sidebarGroupOrder[index] }}</div>
       <div class="group__body">
 
@@ -101,7 +101,6 @@ export default {
         .map(item => {
           return this.items[item]
         })
-        .filter(item => item)
     },
   },
   methods: {
