@@ -21,6 +21,7 @@
   "directories": {
     "doc": "docs"
   },
+  "main": "index.js",
   "scripts": {
     "dev": "npm run docs:dev",
     "docs:dev": "vuepress dev docs",
