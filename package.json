@@ -36,7 +36,7 @@
     "axios": "^0.18.0"
   },
   "devDependencies": {
-    "gh-pages": "^1.2.0",
+    "gh-pages": "^2.0.1",
     "prettier": "^1.15.3"
   }
 }
