@@ -3,18 +3,19 @@
     <div class="content">
       <h1>Not Found</h1>
       <p>{{ getMsg() }}</p>
-      <router-link to="/">Take me home.</router-link>
+      <router-link class="backto" to="/">Take me home.</router-link>
     </div>
   </div>
 </template>
 
 <script>
 const msgs = [
-  `There's nothing here.`,
-  `How did we get here?`,
-  `That's a Four-Oh-Four.`,
-  `Looks like we've got some broken links.`,
-  `Please try your request again or contact support.`,
+  "There's nothing here.",
+  'How did we get here?',
+  "That's a Four-Oh-Four.",
+  "Looks like we've got some broken links.",
+  'Please try your request again or contact support.',
+  "The page you are looking for doesn't exist or misterionsly dissapear.",
 ]
 
 export default {
@@ -40,7 +41,7 @@ export default {
   margin-bottom: 24px
 
   h1
-    margin-bottom: 0
+    margin: 0
     font-size: 20px
     font-weight: 500
 
@@ -50,6 +51,11 @@ export default {
 
   p
     margin: 0
-    margin-right: 10px;
+    margin-right: 10px
     font-size: 14px
+
+  .backto
+    font-size: 14px
+    text-decoration: none
+    color: #067df7
 </style>

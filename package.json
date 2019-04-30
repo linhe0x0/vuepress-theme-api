@@ -21,6 +21,7 @@
   "directories": {
     "doc": "docs"
   },
+  "main": "index.js",
   "scripts": {
     "dev": "npm run docs:dev",
     "docs:dev": "vuepress dev docs",
@@ -36,7 +37,7 @@
     "axios": "^0.18.0"
   },
   "devDependencies": {
-    "gh-pages": "^1.2.0",
-    "prettier": "^1.13.7"
+    "gh-pages": "^2.0.1",
+    "prettier": "^1.15.3"
   }
 }
