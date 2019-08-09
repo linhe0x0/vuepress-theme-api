@@ -1,7 +1,6 @@
 <template>
   <div class="content-block">
-    <div ref="heading-box" class="content-block__heading">
-    </div>
+    <div ref="heading-box" class="content-block__heading"></div>
     <div class="content-block__body">
       <div ref="cont-box" class="content-block__cont">
         <slot></slot>

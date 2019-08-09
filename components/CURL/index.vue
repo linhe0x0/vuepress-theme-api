@@ -3,7 +3,9 @@
     <div ref="curl">
       <slot></slot>
     </div>
-    <Button :light="lightBtn" :loading="loading" @click="sendRequest">Send request now</Button>
+    <Button :light="lightBtn" :loading="loading" @click="sendRequest"
+      >Send request now</Button
+    >
   </div>
 </template>
 

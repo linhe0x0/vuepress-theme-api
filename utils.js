@@ -75,13 +75,15 @@ export function resolveSidebarItems($page, $site, $localePath) {
   let languageSelectText
 
   if ($site.locales) {
-    languageSelectText = config.get($site, 'selectText', $localePath) || 'languages'
+    languageSelectText =
+      config.get($site, 'selectText', $localePath) || 'languages'
 
     sidebars[languageSelectText] = {
       title: languageSelectText,
       children: Object.keys($site.locales).map(locale => {
         const item = $site.locales[locale]
-        let languageTitle = config.get($site, 'label', locale) || item.text || item.lang
+        let languageTitle =
+          config.get($site, 'label', locale) || item.text || item.lang
         let path
 
         if (item.path === $localePath) {

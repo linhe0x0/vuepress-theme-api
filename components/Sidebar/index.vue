@@ -1,57 +1,87 @@
 <template>
   <div class="sidebar">
-    <div class="group" v-for="sidebarGroupItem, index in sidebars" v-if="sidebarGroupItem">
+    <div
+      class="group"
+      v-for="(sidebarGroupItem, index) in sidebars"
+      v-if="sidebarGroupItem"
+    >
       <div class="group__title">{{ sidebarGroupOrder[index] }}</div>
       <div class="group__body">
-
         <!-- render README.md in this folder -->
-        <div v-if="sidebarGroupItem.to" :class="[
-          'group__category',
-          'category',
-          {
-            'category--selected': $route.fullPath === sidebarGroupItem.to,
-            'category--active': $route.fullPath === sidebarGroupItem.to,
-          }
-        ]">
+        <div
+          v-if="sidebarGroupItem.to"
+          :class="[
+            'group__category',
+            'category',
+            {
+              'category--selected': $route.fullPath === sidebarGroupItem.to,
+              'category--active': $route.fullPath === sidebarGroupItem.to,
+            },
+          ]"
+        >
           <div class="category__label">
-            <NavLink :to="sidebarGroupItem.to">{{ title(sidebarGroupItem.title || sidebarGroupOrder[index]) }}</NavLink>
+            <NavLink :to="sidebarGroupItem.to">{{
+              title(sidebarGroupItem.title || sidebarGroupOrder[index])
+            }}</NavLink>
           </div>
         </div>
 
         <!-- render headers of README.md in this folder -->
-        <div v-if="sidebarGroupItem.headers && sidebarGroupItem.headers.length" v-for="header in sidebarGroupItem.headers" :class="[
-          'group__category',
-          'category',
-          {
-            'category--selected': $route.fullPath === `${sidebarGroupItem.to}#${header.slug}`,
-            'category--active': $route.fullPath === `${sidebarGroupItem.to}#${header.slug}`,
-          }
-        ]">
+        <div
+          v-if="sidebarGroupItem.headers && sidebarGroupItem.headers.length"
+          v-for="header in sidebarGroupItem.headers"
+          :class="[
+            'group__category',
+            'category',
+            {
+              'category--selected':
+                $route.fullPath === `${sidebarGroupItem.to}#${header.slug}`,
+              'category--active':
+                $route.fullPath === `${sidebarGroupItem.to}#${header.slug}`,
+            },
+          ]"
+        >
           <div class="category__label">
-            <NavLink :to="`${sidebarGroupItem.to}#${header.slug}`">{{ title(header.title) }}</NavLink>
+            <NavLink :to="`${sidebarGroupItem.to}#${header.slug}`">{{
+              title(header.title)
+            }}</NavLink>
           </div>
         </div>
 
         <!-- render other files in this folder -->
-        <div v-if="sidebarGroupItem.children && sidebarGroupItem.children.length" v-for="child in sidebarGroupItem.children" :name="`${child.to}`" :class="[
-          'group__category',
-          'category',
-          {
-            'category--selected': !child.isLangNav && $route.path === child.to,
-            'category--active': !child.isLangNav && $route.fullPath === child.to,
-          }
-        ]">
+        <div
+          v-if="sidebarGroupItem.children && sidebarGroupItem.children.length"
+          v-for="child in sidebarGroupItem.children"
+          :name="`${child.to}`"
+          :class="[
+            'group__category',
+            'category',
+            {
+              'category--selected':
+                !child.isLangNav && $route.path === child.to,
+              'category--active':
+                !child.isLangNav && $route.fullPath === child.to,
+            },
+          ]"
+        >
           <div class="category__label">
             <NavLink :to="child.to">{{ title(child.title) }}</NavLink>
           </div>
-          <div v-if="child.headers && child.headers.length" v-for="header in child.headers" :class="[
-            'category__headers',
-            {
-              'category--active': $route.fullPath === `${child.to}#${header.slug}`,
-            }
-          ]">
+          <div
+            v-if="child.headers && child.headers.length"
+            v-for="header in child.headers"
+            :class="[
+              'category__headers',
+              {
+                'category--active':
+                  $route.fullPath === `${child.to}#${header.slug}`,
+              },
+            ]"
+          >
             <div class="category__header-item">
-              <NavLink :to="`${child.to}#${header.slug}`">{{ title(header.title) }}</NavLink>
+              <NavLink :to="`${child.to}#${header.slug}`">{{
+                title(header.title)
+              }}</NavLink>
             </div>
           </div>
         </div>
@@ -84,7 +114,8 @@ export default {
         this.$localePath
       )
 
-      const languageSelectText = config.get(this.$site, 'selectText', this.$localePath) || 'languages'
+      const languageSelectText =
+        config.get(this.$site, 'selectText', this.$localePath) || 'languages'
 
       if (groupOrderConfig) {
         const result = groupOrderConfig.slice()
@@ -97,10 +128,9 @@ export default {
       }
     },
     sidebars() {
-      return this.sidebarGroupOrder
-        .map(item => {
-          return this.items[item]
-        })
+      return this.sidebarGroupOrder.map(item => {
+        return this.items[item]
+      })
     },
   },
   methods: {

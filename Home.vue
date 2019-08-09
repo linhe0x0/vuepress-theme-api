@@ -10,8 +10,7 @@
         <Content custom />
       </div>
     </div>
-    <footer class="home__footer" v-html="footer">
-    </footer>
+    <footer class="home__footer" v-html="footer"></footer>
   </div>
 </template>
 

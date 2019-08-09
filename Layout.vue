@@ -9,17 +9,17 @@
       </div>
       <div class="col-md-10">
         <div class="custom__layout" v-if="$page.frontmatter.layout">
-          <component :is="$page.frontmatter.layout"/>
+          <component :is="$page.frontmatter.layout" />
         </div>
-        <Home v-else-if="$page.frontmatter.home"/>
+        <Home v-else-if="$page.frontmatter.home" />
         <Page v-else></Page>
       </div>
     </div>
     <div v-else>
       <div class="custom__layout" v-if="$page.frontmatter.layout">
-        <component :is="$page.frontmatter.layout"/>
+        <component :is="$page.frontmatter.layout" />
       </div>
-      <Home v-else-if="$page.frontmatter.home"/>
+      <Home v-else-if="$page.frontmatter.home" />
       <Page v-else></Page>
     </div>
   </div>
@@ -97,6 +97,5 @@ export default {
 }
 </script>
 
-<style src="prismjs/themes/prism-tomorrow.css">
-</style>
+<style src="prismjs/themes/prism-tomorrow.css"></style>
 <style src="./styles/theme.styl" lang="stylus"></style>
