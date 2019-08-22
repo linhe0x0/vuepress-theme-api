@@ -252,9 +252,15 @@ export default {
 
   &__heading {
     width: 50%;
-    padding: 4rem 3rem 0;
+    padding: 0;
     overflow: auto;
     background-color: #fafafa;
+
+    h1
+    h2
+    h3 {
+      padding: 4rem 3rem 0;
+    }
   }
 
   &__body {
