@@ -43,13 +43,15 @@ export default {
     action() {
       return {
         text: this.data.actionText,
-        link: localizePath(this.data.actionLink, this.$localePath),
+        link:
+          this.data.actionLink.indexOf('http') == -1
+            ? localizePath(this.data.actionLink, this.$localePath)
+            : this.data.actionLink,
       }
     },
     footer() {
       const defaultFooter =
         'Open Source on [GitHub](https://github.com/sqrthree/vuepress-theme-api), Made by [@sqrthree](https://github.com/sqrthree), Power by [vuepress](https://github.com/vuejs/vuepress).'
-
       return md.render(this.data.footer || defaultFooter)
     },
   },
