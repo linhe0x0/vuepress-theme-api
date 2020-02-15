@@ -62,7 +62,6 @@ export default {
 @import './styles/_variables.styl'
 
 .home
-
   &__header
     margin: 10rem 0
     text-align: center
@@ -84,8 +83,10 @@ export default {
   &__content
     padding: 6rem 4rem
     border-top: 1px solid $divider-color
-
+  
   &__footer
-    margin: 2rem 0
+    margin-bottom: 3rem
+    margin-left: 4rem
+    margin-right: 4rem
     text-align: center
 </style>

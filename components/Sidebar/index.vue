@@ -150,6 +150,8 @@ export default {
   padding-top: 3rem
   overflow: auto
   background: $white
+  @media screen and (max-width: $container-max-widths.md)
+    position: relative
 
 .group
   margin-bottom: 4rem

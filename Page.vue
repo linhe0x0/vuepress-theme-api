@@ -4,9 +4,9 @@
     <div class="content__footer-container">
       <div class="content__footer">
         <div v-if="editLink" class="edit-link">
-          <a :href="editLink" target="_blank" rel="noopener noreferrer">
-            {{ editLinkText }}
-          </a>
+          <a :href="editLink" target="_blank" rel="noopener noreferrer">{{
+            editLinkText
+          }}</a>
           <svg
             viewBox="0 0 33 32"
             version="1.1"
@@ -186,109 +186,114 @@ export default {
 </script>
 
 <style lang="stylus">
-@import './styles/_variables.styl';
+@import './styles/_variables.styl'
 
-.page__container {
-  min-height: 100vh;
-  padding: 4rem 6rem 0;
+.page__container
+  min-height: 100vh
+  padding: 4rem 6rem 0
 
-  .curl__container {
-    text-align: center;
-  }
-}
+  .curl__container
+    text-align: center
 
-.content__footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 2em 0;
-  font-size: 14px;
-  color: #999;
+  @media screen and (max-width: $container-max-widths.md)
+    padding: 2rem 2rem 0
 
-  .edit-link {
-    a {
-      margin-right: 0.5em;
-      font-weight: 600;
-      color: #000;
-    }
+    .content-block__heading, .content-block__cont, .content-block
+      width: 100%
+      padding: 1rem 0 0 0
+      margin: 0
+      background-color: $white
 
-    svg {
-      vertical-align: middle;
-    }
-  }
-}
+    .content-block__examples
+      padding: 0
+      margin: 0
+      width: 100%
 
-.page--block-layout {
-  .content__footer-container {
-    margin: 0 -3rem;
-    background-color: #000;
-  }
+    .examples
+      width: 100%
+      padding: 1rem
+      background-color: $black
+      border-radius: 6px
 
-  .content__footer {
-    width: 50%;
-    padding: 0 3rem 2rem;
-    background-color: #fafafa;
-  }
-}
+    .content-block__body
+      flex-direction: column
 
-.content-block {
-  margin: -4rem -6rem 4rem;
-  background-color: $black;
+    .content-block::after
+      background-image: none
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+.content__footer
+  display: flex
+  justify-content: space-between
+  padding: 2em 0
+  font-size: 14px
+  color: #999
 
-  &:after {
-    height: 1px;
-    display: block;
-    content: '';
-    width: 100%;
-    background-image: linear-gradient(90deg, #eaeaea 50%, #333 50%);
-  }
+  .edit-link
+    a
+      margin-right: 0.5em
+      font-weight: 600
+      color: #000
 
-  &:last-child:after {
-    display: none;
-  }
+    svg
+      vertical-align: middle
 
-  &__heading {
-    width: 50%;
-    padding: 4rem 3rem 0;
-    overflow: auto;
-    background-color: #fafafa;
-  }
+.page--block-layout
+  .content__footer-container
+    margin: 0 -3rem
+    background-color: #000
 
-  &__body {
-    display: flex;
-  }
+  .content__footer
+    width: 50%
+    padding: 0 3rem 2rem
+    background-color: #fafafa
 
-  &__cont, &__examples {
-    width: 50%;
-    padding: 0 3rem 2rem;
-  }
+.content-block
+  margin: -4rem -6rem 4rem
+  background-color: $black
 
-  &__cont {
-    background-color: #fafafa;
-  }
+  &:last-child
+    margin-bottom: 0
 
-  &__examples {
-    color: $white;
+  &:after
+    height: 1px
+    display: block
+    content: ''
+    width: 100%
+    background-image: linear-gradient(90deg, #eaeaea 50%, #333 50%)
 
-    .btn {
-      margin: 2em 0;
-    }
+  &:last-child:after
+    display: none
 
-    p {
-      font-size: 12px;
-    }
+  &__heading
+    width: 50%
+    padding: 4rem 3rem 0
+    overflow: auto
+    background-color: #fafafa
+
+  &__body
+    display: flex
+    overflow-x: hidden
+
+  &__cont, &__examples
+    width: 50%
+    padding: 0 3rem 2rem
+
+  &__cont
+    background-color: #fafafa
+
+  &__examples
+    color: $white
+
+    .btn
+      margin: 2em 0
+
+    p
+      font-size: 12px
 
     // reset style
-    blockquote {
-      border-left-color: $white;
+    blockquote
+      border-left-color: $white
 
-      p {
-        color: #888;
-      }
-    }
-  }
-}
+      p
+        color: #888
 </style>
