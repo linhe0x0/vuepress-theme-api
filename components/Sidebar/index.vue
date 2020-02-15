@@ -20,7 +20,7 @@
           ]"
         >
           <div class="category__label">
-            <NavLink :to="sidebarGroupItem.to">{{
+            <NavLink class="sidebar-link" :to="sidebarGroupItem.to">{{
               title(sidebarGroupItem.title || sidebarGroupOrder[index])
             }}</NavLink>
           </div>
@@ -42,7 +42,7 @@
           ]"
         >
           <div class="category__label">
-            <NavLink :to="`${sidebarGroupItem.to}#${header.slug}`">{{
+            <NavLink class="sidebar-link" :to="`${sidebarGroupItem.to}#${header.slug}`">{{
               title(header.title)
             }}</NavLink>
           </div>
@@ -65,7 +65,7 @@
           ]"
         >
           <div class="category__label">
-            <NavLink :to="child.to">{{ title(child.title) }}</NavLink>
+            <NavLink class="sidebar-link" :to="child.to">{{ title(child.title) }}</NavLink>
           </div>
           <div
             v-if="child.headers && child.headers.length"
@@ -79,7 +79,7 @@
             ]"
           >
             <div class="category__header-item">
-              <NavLink :to="`${child.to}#${header.slug}`">{{
+              <NavLink class="sidebar-link" :to="`${child.to}#${header.slug}`">{{
                 title(header.title)
               }}</NavLink>
             </div>
