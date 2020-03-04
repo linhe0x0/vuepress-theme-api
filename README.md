@@ -1,3 +1,9 @@
+> v1.0 is under active development ([v1.0.0](https://github.com/sqrthree/vuepress-theme-api/tree/v1.0.0) ), going to release in the next two months.
+>
+> Before that, only PRs with bug fix will be merged into the master branch.
+
+---
+
 # vuepress-theme-api
 
 [![npm](https://img.shields.io/npm/v/vuepress-theme-api.svg)](https://www.npmjs.com/package/vuepress-theme-api)
