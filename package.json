@@ -25,7 +25,7 @@
   "scripts": {
     "link": "npm link && npm link vuepress-theme-api",
     "dev": "npm run docs:dev",
-    "docs:dev": "vuepress dev docs",
+    "docs:dev": "vuepress dev docs --no-cache",
     "docs:build": "vuepress build docs",
     "docs:serve": "serve --single docs/.vuepress/dist",
     "docs:clean": "rm -r docs/.vuepress/dist",

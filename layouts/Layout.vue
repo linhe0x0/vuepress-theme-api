@@ -2,8 +2,8 @@
   <div class="theme__container" :class="pageClasses">
     <div class="menu__container">
       <a v-on:click="openMenu()" v-show="shouldShowSidebar">
-        <img src="./src/menu.png" v-show="shouldContentSeen" />
-        <img src="./src/close.png" v-show="shouldMenuOpen" />
+        <img src="../assets/menu.png" v-show="shouldContentSeen" />
+        <img src="../assets/close.png" v-show="shouldMenuOpen" />
       </a>
     </div>
     <div class="row" v-if="shouldShowSidebar">
@@ -38,11 +38,11 @@
 import Vue from 'vue'
 import nprogress from 'nprogress'
 
-import Sidebar from './components/Sidebar'
+import Sidebar from '../components/Sidebar'
 import Home from './Home'
 import Page from './Page'
 
-import { resolveSidebarItems } from './utils'
+import { resolveSidebarItems } from '../helpers/utils'
 
 export default {
   components: {
@@ -129,9 +129,9 @@ export default {
 </script>
 
 <style src="prismjs/themes/prism-tomorrow.css"></style>
-<style src="./styles/theme.styl" lang="stylus"></style>
+<style src="../styles/theme.styl" lang="stylus"></style>
 <style lang="stylus">
-@import './styles/_variables.styl'
+@import '../styles/_variables.styl'
 
 @media screen and (max-width: $container-max-widths.md)
   img

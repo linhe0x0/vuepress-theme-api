@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { isExternalLink } from './utils'
+import { isExternalLink } from '../helpers/utils'
 
 const isHeading = el => {
   const tagname = el.tagName.toLowerCase()
@@ -186,7 +186,7 @@ export default {
 </script>
 
 <style lang="stylus">
-@import './styles/_variables.styl'
+@import '../styles/_variables.styl'
 
 .page__container
   min-height: 100vh

@@ -12,9 +12,9 @@
 <script>
 import nprogress from 'nprogress'
 
-import request from '../../request'
-import { isJSON, isQueryString, parseQueryString } from '../../utils'
-import curl from '../../curl'
+import request from '../../helpers/request'
+import { isJSON, isQueryString, parseQueryString } from '../../helpers/utils'
+import curl from '../../helpers/curl'
 
 // configure progress bar
 nprogress.configure({ showSpinner: false })

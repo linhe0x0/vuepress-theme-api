@@ -42,9 +42,11 @@
           ]"
         >
           <div class="category__label">
-            <NavLink class="sidebar-link" :to="`${sidebarGroupItem.to}#${header.slug}`">{{
-              title(header.title)
-            }}</NavLink>
+            <NavLink
+              class="sidebar-link"
+              :to="`${sidebarGroupItem.to}#${header.slug}`"
+              >{{ title(header.title) }}</NavLink
+            >
           </div>
         </div>
 
@@ -65,7 +67,9 @@
           ]"
         >
           <div class="category__label">
-            <NavLink class="sidebar-link" :to="child.to">{{ title(child.title) }}</NavLink>
+            <NavLink class="sidebar-link" :to="child.to">{{
+              title(child.title)
+            }}</NavLink>
           </div>
           <div
             v-if="child.headers && child.headers.length"
@@ -79,9 +83,11 @@
             ]"
           >
             <div class="category__header-item">
-              <NavLink class="sidebar-link" :to="`${child.to}#${header.slug}`">{{
-                title(header.title)
-              }}</NavLink>
+              <NavLink
+                class="sidebar-link"
+                :to="`${child.to}#${header.slug}`"
+                >{{ title(header.title) }}</NavLink
+              >
             </div>
           </div>
         </div>
@@ -91,8 +97,8 @@
 </template>
 
 <script>
-import config from '../../config'
-import { title } from '../../utils'
+import config from '../../helpers/config'
+import { title } from '../../helpers/utils'
 import NavLink from '../NavLink'
 
 export default {

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { isExternalLink } from '../../utils'
+import { isExternalLink } from '../../helpers/utils'
 
 export default {
   props: {
