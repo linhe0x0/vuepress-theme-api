@@ -1,7 +1,7 @@
 <template>
   <div class="theme__container" :class="pageClasses">
-    <div class="menu__container">
-      <a v-show="shouldShowSidebar" @click="openMenu()">
+    <div class="menu menu__container">
+      <a class="menu__btn" v-show="shouldShowSidebar" @click="openMenu()">
         <img v-show="shouldContentSeen" src="../assets/menu.png" />
         <img v-show="shouldMenuOpen" src="../assets/close.png" />
       </a>
@@ -138,14 +138,18 @@ export default {
     width: 100%
     height: 100%
 
-  .menu__container
-    display: block
-    position: sticky
-    padding: 2rem 2rem 0
-    text-align: right
+  .menu
+    &__container
+      position: sticky
+      top: 0
+      z-index: 2
+      display: block
+      padding: 0.875rem 2rem
+      text-align: right
+      background-color: $white
 
     img
-      width: 30px
+      width: 24px
 
 @media screen and (min-width: $container-max-widths.md)
   img

@@ -215,9 +215,10 @@ export default {
       this.$router.push(path)
     },
     refreshContainerWidth() {
-      this.containerWidth = `${
-        this.$refs.container.parentNode.getBoundingClientRect().width
-      }px`
+      const width = this.$refs.container.parentNode.getBoundingClientRect()
+        .width
+
+      this.containerWidth = width ? `${width}px` : '100%'
     },
   },
 }
@@ -235,8 +236,6 @@ export default {
   padding-top: 3rem
   overflow: auto
   background: $white
-  @media screen and (max-width: $container-max-widths.md)
-    position: relative
 
 .group
   margin-bottom: 4rem
@@ -278,7 +277,6 @@ export default {
     & ^[0]__headers
       display: block
 
-
   &:hover &__label,
   &__headers:hover,
   &--active &__label,
@@ -289,6 +287,7 @@ export default {
   &__header-item
     position: relative
     padding-left: 30px
+    margin: 0.1em 0
 
     & ^[0]__link
       padding-left: 20px

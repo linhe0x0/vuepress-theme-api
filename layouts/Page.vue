@@ -3,6 +3,10 @@
     <Content custom />
     <div class="content__footer-container">
       <div class="content__footer">
+        <div v-if="lastUpdated" class="last-updated">
+          <span class="prefix">{{ lastUpdatedText }}:</span>
+          <span class="time">{{ lastUpdated }}</span>
+        </div>
         <div v-if="editLink" class="edit-link">
           <a :href="editLink" target="_blank" rel="noopener noreferrer">{{
             editLinkText
@@ -23,10 +27,6 @@
             </g>
           </svg>
         </div>
-        <time v-if="lastUpdated" class="last-updated">
-          <span class="prefix">{{ lastUpdatedText }}:</span>
-          <span class="time">{{ lastUpdated }}</span>
-        </time>
       </div>
     </div>
   </div>
@@ -186,6 +186,7 @@ export default {
 .page__container
   min-height: 100vh
   padding: 4rem 6rem 0
+  background-color: #fafafa
 
   .curl__container
     text-align: center
@@ -193,28 +194,34 @@ export default {
   @media screen and (max-width: $container-max-widths.md)
     padding: 2rem 2rem 0
 
-    .content-block__heading, .content-block__cont, .content-block
-      width: 100%
-      padding: 1rem 0 0 0
-      margin: 0
-      background-color: $white
+    .content-block
+      &,
+      &__cont,
+      &__heading
+        width: 100%
+        padding: 1rem 0 0
+        margin: 0
+        background-color: #fafafa
 
-    .content-block__examples
-      padding: 0
-      margin: 0
-      width: 100%
+      &__cont
+        padding-top: 0
+
+      &::after
+        background-image: none
+
+      &__body
+        flex-direction: column
+
+      &__examples
+        padding: 0
+        margin: 0
+        width: 100%
 
     .examples
       width: 100%
       padding: 1rem
       background-color: $black
       border-radius: 6px
-
-    .content-block__body
-      flex-direction: column
-
-    .content-block::after
-      background-image: none
 
 .content__footer
   display: flex
@@ -267,14 +274,21 @@ export default {
 
     h1,
     h2,
-    h3
+    h3,
+    h4,
+    h5,
+    h6
       padding: 4rem 3rem 0
+
+      @media screen and (max-width: $container-max-widths.md)
+        padding: 0
 
   &__body
     display: flex
     overflow-x: hidden
 
-  &__cont, &__examples
+  &__cont,
+  &__examples
     width: 50%
     padding: 0 3rem 2rem
 

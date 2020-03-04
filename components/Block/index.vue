@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     resolveLayout() {
-      const heading = this.$el.querySelector('h1, h2')
+      const heading = this.$el.querySelector('h1, h2, h3, h4, h5, h6')
 
       if (heading) {
         this.$refs['heading-box'].appendChild(heading)
