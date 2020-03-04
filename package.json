@@ -31,7 +31,7 @@
     "docs:clean": "rm -r docs/.vuepress/dist",
     "lint": "prettier --list-different --write '**/*.{js,vue}'",
     "deploy": "npm run docs:build && gh-pages -d docs/.vuepress/dist",
-    "test": "prettier --list-different '**/*.{js,vue}'"
+    "test": "prettier --check '**/*.{js,vue}'"
   },
   "license": "MIT",
   "dependencies": {
