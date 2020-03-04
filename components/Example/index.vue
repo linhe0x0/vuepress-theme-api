@@ -14,7 +14,6 @@ export default {
 @import '../../styles/_variables.styl'
 
 .examples
-
   .custom-block.tip
     border-color: $white
 

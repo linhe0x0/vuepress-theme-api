@@ -17,7 +17,7 @@
 <script>
 import MarkdownIt from 'markdown-it'
 
-import { localizePath } from '../helpers/utils'
+import { localizePath } from '../helpers/path'
 import Button from '../components/Button'
 
 const md = new MarkdownIt()

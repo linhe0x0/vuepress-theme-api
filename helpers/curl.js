@@ -1,17 +1,7 @@
-import { isJSON, isQueryString, parseQueryString } from './utils'
+import { isURL, isJSON, isQueryString } from './is'
 
 const parseField = s => {
   return s.split(/: (.+)/)
-}
-
-export function isURL(url) {
-  if (!url || url.length >= 2083 || /[\s<>]/.test(url)) return false
-
-  // ensure URL starts with HTTP/HTTPS
-  const urlRegexp = /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/
-  const localhost = /^(https?:\/\/)?localhost(\:\d+)*(?:[^\:?\d]\S*)?$/
-
-  return urlRegexp.test(url) || localhost.test(url)
 }
 
 export function isCURL(cmd) {

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { isExternalLink } from '../helpers/utils'
+import { isExternalLink } from '../helpers/is'
 
 const isHeading = el => {
   const tagname = el.tagName.toLowerCase()
@@ -300,9 +300,6 @@ export default {
 
     .btn
       margin: 2em 0
-
-    p
-      font-size: 12px
 
     // reset style
     blockquote

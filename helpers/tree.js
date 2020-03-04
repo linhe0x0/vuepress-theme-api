@@ -1,8 +1,9 @@
 import config from './config'
 import {
-  matchLocalePathFromPath,
   isHomePage,
+  matchFileName,
   matchGroupNameFromPath,
+  matchLocalePathFromPath,
 } from './path'
 
 const getTopLevelOfHeaders = headers => {

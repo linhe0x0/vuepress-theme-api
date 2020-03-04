@@ -13,11 +13,13 @@
 import nprogress from 'nprogress'
 
 import request from '../../helpers/request'
-import { isJSON, isQueryString, parseQueryString } from '../../helpers/utils'
 import curl from '../../helpers/curl'
+import { isJSON, isQueryString } from '../../helpers/is'
 
 // configure progress bar
-nprogress.configure({ showSpinner: false })
+nprogress.configure({
+  showSpinner: false,
+})
 
 export default {
   name: 'CURL',

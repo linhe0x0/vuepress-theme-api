@@ -121,7 +121,7 @@
 
 <script>
 import config from '../../helpers/config'
-import { title } from '../../helpers/utils'
+import title from '../../helpers/title'
 import NavLink from '../NavLink'
 
 export default {
