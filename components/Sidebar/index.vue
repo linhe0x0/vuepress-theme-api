@@ -1,9 +1,21 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" ref="container" :style="{ width: containerWidth }">
+    <div class="group">
+      <div class="group__title">{{ languageSelectText }}</div>
+      <div class="group__body">
+        <div class="sidebar__lang" v-if="shouldShowLangSelect">
+          <Select
+            :options="localePathList"
+            :value="currentPagePath"
+            @change="toggleLocale"
+          ></Select>
+        </div>
+      </div>
+    </div>
     <div
       class="group"
-      v-for="(sidebarGroupItem, index) in sidebars"
       v-if="sidebarGroupItem"
+      v-for="(sidebarGroupItem, index) in sidebars"
     >
       <div class="group__title">{{ sidebarGroupOrder[index] }}</div>
       <div class="group__body">
@@ -20,9 +32,13 @@
           ]"
         >
           <div class="category__label">
-            <NavLink class="sidebar-link" :to="sidebarGroupItem.to">{{
-              title(sidebarGroupItem.title || sidebarGroupOrder[index])
-            }}</NavLink>
+            <NavLink
+              class="category__link sidebar-link"
+              :to="sidebarGroupItem.to"
+              >{{
+                title(sidebarGroupItem.title || sidebarGroupOrder[index])
+              }}</NavLink
+            >
           </div>
         </div>
 
@@ -43,7 +59,7 @@
         >
           <div class="category__label">
             <NavLink
-              class="sidebar-link"
+              class="category__link sidebar-link"
               :to="`${sidebarGroupItem.to}#${header.slug}`"
               >{{ title(header.title) }}</NavLink
             >
@@ -67,7 +83,7 @@
           ]"
         >
           <div class="category__label">
-            <NavLink class="sidebar-link" :to="child.to">{{
+            <NavLink class="category__link sidebar-link" :to="child.to">{{
               title(child.title)
             }}</NavLink>
           </div>
@@ -84,7 +100,7 @@
           >
             <div class="category__header-item">
               <NavLink
-                class="sidebar-link"
+                class="category__link sidebar-link"
                 :to="`${child.to}#${header.slug}`"
                 >{{ title(header.title) }}</NavLink
               >
@@ -112,7 +128,49 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      containerWidth: '100%',
+    }
+  },
   computed: {
+    shouldShowLangSelect() {
+      return Object.keys(this.$site.locales).length > 1
+    },
+    languageSelectText() {
+      return (
+        config.get(this.$site, 'selectText', this.$localePath) || 'languages'
+      )
+    },
+    currentPagePath() {
+      return this.$page.path
+    },
+    localePathList() {
+      return Object.keys(this.$site.locales).map(locale => {
+        const item = this.$site.locales[locale]
+        const languageTitle =
+          config.get(this.$site, 'label', locale) || item.text || item.lang
+
+        let path = ''
+
+        if (item.path === this.$localePath) {
+          path = this.$page.path // Stay on the current page
+        } else {
+          path = this.$page.path.replace(this.$localePath, item.path) // Try to stay on the same page
+
+          const notFound = !this.$site.pages.some(page => page.path === path)
+
+          if (notFound) {
+            path = item.path // Fallback to homepage
+          }
+        }
+
+        return {
+          prop: languageTitle,
+          value: path,
+        }
+      })
+    },
     sidebarGroupOrder() {
       const groupOrderConfig = config.get(
         this.$site,
@@ -126,7 +184,7 @@ export default {
       if (groupOrderConfig) {
         const result = groupOrderConfig.slice()
 
-        result.unshift(languageSelectText, 'home')
+        result.unshift('home')
 
         return result
       } else {
@@ -139,8 +197,19 @@ export default {
       })
     },
   },
+  mounted() {
+    this.refreshContainerWidth()
+  },
   methods: {
     title,
+    toggleLocale(path) {
+      this.$router.push(path)
+    },
+    refreshContainerWidth() {
+      this.containerWidth = `${
+        this.$refs.container.parentNode.getBoundingClientRect().width
+      }px`
+    },
   },
 }
 </script>
@@ -153,6 +222,7 @@ export default {
   top: 0
   bottom: 0
   width: 100%
+  margin-left 1px
   padding-top: 3rem
   overflow: auto
   background: $white
@@ -185,9 +255,11 @@ export default {
   &__label,
   &__headers
     border-left: 4px solid $white
+    border-right: 4px solid $white
 
-  &__label
-    padding-left: 26px
+  &__link
+    display: block
+    padding: 0 26px
 
   &__headers
     display: none
@@ -197,15 +269,23 @@ export default {
     & ^[0]__headers
       display: block
 
+
+  &:hover &__label,
+  &__headers:hover,
   &--active &__label,
   &--active&__headers
-      font-weight: 600
-      border-color: $black
+    font-weight: 600
+    border-left-color: $black
 
   &__header-item
+    position: relative
     padding-left: 30px
 
+    & ^[0]__link
+      padding-left: 20px
+
     &::before
+      position: absolute;
       margin-right: 4px
       color: #979797
       content: "-"

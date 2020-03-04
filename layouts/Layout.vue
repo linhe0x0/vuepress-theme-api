@@ -42,7 +42,7 @@ import Sidebar from '../components/Sidebar'
 import Home from './Home'
 import Page from './Page'
 
-import { resolveSidebarItems } from '../helpers/utils'
+import { getDirTree } from '../helpers/tree'
 
 export default {
   components: {
@@ -72,7 +72,7 @@ export default {
   },
   computed: {
     sidebarItems() {
-      return resolveSidebarItems(this.$page, this.$site, this.$localePath)
+      return getDirTree(this.$site, this.$localePath)
     },
     shouldShowSidebar() {
       const { frontmatter } = this.$page
