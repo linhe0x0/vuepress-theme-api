@@ -208,6 +208,11 @@ export default {
   },
   mounted() {
     this.refreshContainerWidth()
+
+    window.addEventListener('resize', this.refreshContainerWidth)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.refreshContainerWidth)
   },
   methods: {
     title,
