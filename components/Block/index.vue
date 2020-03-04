@@ -15,6 +15,11 @@
 <script>
 export default {
   name: 'Block',
+  mounted() {
+    this.resolveLayout()
+
+    this.$parent.$parent.$emit('addBlock', this)
+  },
   methods: {
     resolveLayout() {
       const heading = this.$el.querySelector('h1, h2')
@@ -29,11 +34,6 @@ export default {
         this.$refs['example-box'].appendChild(examples)
       }
     },
-  },
-  mounted() {
-    this.resolveLayout()
-
-    this.$parent.$parent.$emit('addBlock', this)
   },
 }
 </script>

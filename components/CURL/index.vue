@@ -27,6 +27,11 @@ export default {
       loading: false,
     }
   },
+  mounted() {
+    if (this.notInExampleBox()) {
+      this.lightBtn = false
+    }
+  },
   methods: {
     sendRequest() {
       const cmd = this.$refs.curl.outerText.trim()
@@ -91,11 +96,6 @@ export default {
 
       nprogress.done()
     },
-  },
-  mounted() {
-    if (this.notInExampleBox()) {
-      this.lightBtn = false
-    }
   },
 }
 </script>

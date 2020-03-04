@@ -2,9 +2,9 @@
   <div class="select select__container">
     <select class="select__item" :value="value" @change="handleChange">
       <option
-        class="select__option"
         v-for="item in options"
         :key="item.value"
+        class="select__option"
         :value="item.value"
       >
         {{ item.prop }}

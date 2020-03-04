@@ -61,9 +61,9 @@ export default {
       }
     },
     lastUpdated() {
-      if (this.$page.lastUpdated) {
-        return new Date(this.$page.lastUpdated).toLocaleString(this.$lang)
-      }
+      return this.$page.lastUpdated
+        ? new Date(this.$page.lastUpdated).toLocaleString(this.$lang)
+        : ''
     },
     lastUpdatedText() {
       if (typeof this.$site.themeConfig.lastUpdated === 'string') {
@@ -74,7 +74,7 @@ export default {
     },
     editLink() {
       if (this.$page.frontmatter.editLink === false) {
-        return
+        return ''
       }
 
       const {
@@ -105,6 +105,8 @@ export default {
           path
         )
       }
+
+      return ''
     },
     editLinkText() {
       return this.$site.themeConfig.editLinkText || `Edit this page`
@@ -121,6 +123,14 @@ export default {
         this.$nextTick(this.resolveLayout)
       }
     },
+  },
+  mounted() {
+    if (this.isEnchanceMode) {
+      this.$nextTick(this.resolveLayout)
+    }
+  },
+  created() {
+    this.$on('addBlock', this.addBlock)
   },
   methods: {
     resolveLayout() {
@@ -166,14 +176,6 @@ export default {
     addBlock(block) {
       this.blocks.push(block)
     },
-  },
-  mounted() {
-    if (this.isEnchanceMode) {
-      this.$nextTick(this.resolveLayout)
-    }
-  },
-  created() {
-    this.$on('addBlock', this.addBlock)
   },
 }
 </script>

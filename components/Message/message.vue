@@ -1,5 +1,5 @@
 <template>
-  <div :class="messageClasses" ref="message" v-if="visible">
+  <div v-if="visible" ref="message" :class="messageClasses">
     <div class="message__notice">
       <div class="message__content">
         <i :class="`message__icon message__icon--${type}`"></i>
@@ -34,6 +34,13 @@ export default {
       }
     },
   },
+  mounted() {
+    this.enter()
+
+    setTimeout(() => {
+      this.leave()
+    }, 1000 * 3)
+  },
   methods: {
     enter() {
       this.animation.enter = true
@@ -61,13 +68,6 @@ export default {
 
       this.$refs.message.remove()
     },
-  },
-  mounted() {
-    this.enter()
-
-    setTimeout(() => {
-      this.leave()
-    }, 1000 * 3)
   },
 }
 </script>

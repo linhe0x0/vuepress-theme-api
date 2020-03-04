@@ -1,9 +1,9 @@
 <template>
-  <div class="sidebar" ref="container" :style="{ width: containerWidth }">
+  <div ref="container" class="sidebar" :style="{ width: containerWidth }">
     <div class="group">
       <div class="group__title">{{ languageSelectText }}</div>
       <div class="group__body">
-        <div class="sidebar__lang" v-if="shouldShowLangSelect">
+        <div v-if="shouldShowLangSelect" class="sidebar__lang">
           <Select
             :options="localePathList"
             :value="currentPagePath"
@@ -13,9 +13,9 @@
       </div>
     </div>
     <div
-      class="group"
       v-for="(sidebarGroupItem, index) in sidebars"
       :key="sidebarGroupItem.to || index"
+      class="group"
     >
       <div class="group__title">{{ sidebarGroupOrder[index] }}</div>
       <div class="group__body">

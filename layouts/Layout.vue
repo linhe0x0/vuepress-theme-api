@@ -1,23 +1,23 @@
 <template>
   <div class="theme__container" :class="pageClasses">
     <div class="menu__container">
-      <a v-on:click="openMenu()" v-show="shouldShowSidebar">
-        <img src="../assets/menu.png" v-show="shouldContentSeen" />
-        <img src="../assets/close.png" v-show="shouldMenuOpen" />
+      <a v-show="shouldShowSidebar" @click="openMenu()">
+        <img v-show="shouldContentSeen" src="../assets/menu.png" />
+        <img v-show="shouldMenuOpen" src="../assets/close.png" />
       </a>
     </div>
-    <div class="row" v-if="shouldShowSidebar">
-      <div class="col-md-3 col-lg-2 sidebar__container" v-show="shouldMenuOpen">
+    <div v-if="shouldShowSidebar" class="row">
+      <div v-show="shouldMenuOpen" class="col-md-3 col-lg-2 sidebar__container">
         <Sidebar :items="sidebarItems">
-          <slot name="sidebar-top" slot="top" />
-          <slot name="sidebar-bottom" slot="bottom" />
+          <slot slot="top" name="sidebar-top" />
+          <slot slot="bottom" name="sidebar-bottom" />
         </Sidebar>
       </div>
       <div
-        class="col-md-9 col-lg-10 content__container"
         v-show="shouldContentSeen"
+        class="col-md-9 col-lg-10 content__container"
       >
-        <div class="custom__layout" v-if="$page.frontmatter.layout">
+        <div v-if="$page.frontmatter.layout" class="custom__layout">
           <component :is="$page.frontmatter.layout" />
         </div>
         <Home v-else-if="$page.frontmatter.home" />
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div v-else>
-      <div class="custom__layout" v-if="$page.frontmatter.layout">
+      <div v-if="$page.frontmatter.layout" class="custom__layout">
         <component :is="$page.frontmatter.layout" />
       </div>
       <Home v-else-if="$page.frontmatter.home" />
@@ -57,19 +57,6 @@ export default {
       shouldContentSeen: true,
     }
   },
-  methods: {
-    openMenu: function() {
-      this.shouldMenuOpen
-        ? (this.shouldMenuOpen = false)
-        : (this.shouldMenuOpen = true)
-      this.shouldContentSeen
-        ? (this.shouldContentSeen = false)
-        : (this.shouldContentSeen = true)
-      this.isSidebarOpen
-        ? (this.isSidebarOpen = false)
-        : (this.isSidebarOpen = true)
-    },
-  },
   computed: {
     sidebarItems() {
       return getDirTree(this.$site, this.$localePath)
@@ -95,6 +82,13 @@ export default {
       ]
     },
   },
+  watch: {
+    $route: function() {
+      this.isSidebarOpen = false
+      this.shouldMenuOpen = false
+      this.shouldContentSeen = true
+    },
+  },
   mounted() {
     // configure progress bar
     nprogress.configure({ showSpinner: false })
@@ -111,19 +105,25 @@ export default {
       nprogress.done()
     })
   },
-  watch: {
-    $route: function() {
-      this.isSidebarOpen = false
-      this.shouldMenuOpen = false
-      this.shouldContentSeen = true
-    },
-  },
   created() {
     if (this.$ssrContext) {
       this.$ssrContext.title = this.$title
       this.$ssrContext.lang = this.$lang
       this.$ssrContext.description = this.$page.description || this.$description
     }
+  },
+  methods: {
+    openMenu: function() {
+      this.shouldMenuOpen
+        ? (this.shouldMenuOpen = false)
+        : (this.shouldMenuOpen = true)
+      this.shouldContentSeen
+        ? (this.shouldContentSeen = false)
+        : (this.shouldContentSeen = true)
+      this.isSidebarOpen
+        ? (this.isSidebarOpen = false)
+        : (this.isSidebarOpen = true)
+    },
   },
 }
 </script>
