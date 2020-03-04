@@ -1,22 +1,14 @@
 <template>
   <div class="theme__container" :class="pageClasses">
-    <div class="menu menu__container">
-      <a class="menu__btn" v-show="shouldShowSidebar" @click="openMenu()">
-        <img v-show="shouldContentSeen" src="../assets/menu.png" />
-        <img v-show="shouldMenuOpen" src="../assets/close.png" />
-      </a>
-    </div>
     <div v-if="shouldShowSidebar" class="row">
-      <div v-show="shouldMenuOpen" class="col-md-3 col-lg-2 sidebar__container">
-        <Sidebar :items="sidebarItems">
+      <div class="col-md-3 col-lg-2 sidebar__container">
+        <Menubar :open.sync="isMenuOpened" />
+        <Sidebar v-show="isMenuOpened" :items="sidebarItems">
           <slot slot="top" name="sidebar-top" />
           <slot slot="bottom" name="sidebar-bottom" />
         </Sidebar>
       </div>
-      <div
-        v-show="shouldContentSeen"
-        class="col-md-9 col-lg-10 content__container"
-      >
+      <div class="col-md-9 col-lg-10 content__container">
         <div v-if="$page.frontmatter.layout" class="custom__layout">
           <component :is="$page.frontmatter.layout" />
         </div>
@@ -24,7 +16,7 @@
         <Page v-else></Page>
       </div>
     </div>
-    <div v-else>
+    <div v-if="!shouldShowSidebar">
       <div v-if="$page.frontmatter.layout" class="custom__layout">
         <component :is="$page.frontmatter.layout" />
       </div>
@@ -53,8 +45,7 @@ export default {
   data() {
     return {
       isSidebarOpen: true,
-      shouldMenuOpen: false,
-      shouldContentSeen: true,
+      isMenuOpened: false,
     }
   },
   computed: {
@@ -75,7 +66,6 @@ export default {
 
       return [
         {
-          'sidebar-open': this.shouldShowSidebar && this.isSidebarOpen,
           'no-sidebar': !this.shouldShowSidebar,
         },
         userPageClass,
@@ -84,9 +74,7 @@ export default {
   },
   watch: {
     $route: function() {
-      this.isSidebarOpen = false
-      this.shouldMenuOpen = false
-      this.shouldContentSeen = true
+      this.isMenuOpened = false
     },
   },
   mounted() {
@@ -112,53 +100,8 @@ export default {
       this.$ssrContext.description = this.$page.description || this.$description
     }
   },
-  methods: {
-    openMenu: function() {
-      this.shouldMenuOpen
-        ? (this.shouldMenuOpen = false)
-        : (this.shouldMenuOpen = true)
-      this.shouldContentSeen
-        ? (this.shouldContentSeen = false)
-        : (this.shouldContentSeen = true)
-      this.isSidebarOpen
-        ? (this.isSidebarOpen = false)
-        : (this.isSidebarOpen = true)
-    },
-  },
 }
 </script>
 
 <style src="prismjs/themes/prism-tomorrow.css"></style>
 <style src="../styles/theme.styl" lang="stylus"></style>
-<style lang="stylus">
-@import '../styles/_variables.styl'
-
-@media screen and (max-width: $container-max-widths.md)
-  img
-    width: 100%
-    height: 100%
-
-  .menu
-    &__container
-      position: sticky
-      top: 0
-      z-index: 2
-      display: block
-      padding: 0.875rem 2rem
-      text-align: right
-      background-color: $white
-
-    img
-      width: 24px
-
-@media screen and (min-width: $container-max-widths.md)
-  img
-    width: 50%
-    height: 50%
-
-  .menu__container
-    display: none
-
-  .content__container, .sidebar__container
-    display: block !important
-</style>

@@ -5,8 +5,9 @@ import Example from './Example'
 import CURL from './CURL'
 import Message from './Message'
 import Select from './Select'
+import Menubar from './Menubar'
 
-const components = [Button, Section, Block, Example, CURL, Select]
+const components = [Button, Section, Block, Example, CURL, Select, Menubar]
 
 const install = Vue => {
   components.forEach(component => {

@@ -231,11 +231,13 @@ export default {
   position: fixed
   top: 0
   bottom: 0
+  z-index: 2
   width: 100%
   margin-left 1px
   padding-top: 3rem
   overflow: auto
   background: $white
+  user-select: none
 
 .group
   margin-bottom: 4rem
