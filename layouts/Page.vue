@@ -62,8 +62,6 @@ export default {
     },
     lastUpdated() {
       return this.$page.lastUpdated
-        ? new Date(this.$page.lastUpdated).toLocaleString(this.$lang)
-        : ''
     },
     lastUpdatedText() {
       if (typeof this.$site.themeConfig.lastUpdated === 'string') {
