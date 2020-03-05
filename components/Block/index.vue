@@ -28,10 +28,12 @@ export default {
         this.$refs['heading-box'].appendChild(heading)
       }
 
-      const examples = this.$refs['cont-box'].querySelector('.examples')
+      const examples = this.$refs['cont-box'].querySelectorAll('.examples')
 
       if (examples) {
-        this.$refs['example-box'].appendChild(examples)
+        examples.forEach(item => {
+          this.$refs['example-box'].appendChild(item)
+        })
       }
     },
   },

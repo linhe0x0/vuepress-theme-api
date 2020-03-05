@@ -1,6 +1,6 @@
 import globalComponents from './components/global'
 
-export default ({ Vue, options, router, siteData }) => {
+export default ({ Vue }) => {
   // register components.
   Vue.use(globalComponents)
 }

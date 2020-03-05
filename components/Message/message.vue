@@ -77,6 +77,7 @@ export default {
   position: fixed
   top: 16px
   left: 0
+  z-index: 20
   width: 100%
   font-size: 14px
   line-height: 1.5

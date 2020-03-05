@@ -69,9 +69,7 @@ const statusText = {
 }
 
 instance.interceptors.response.use(
-  response => {
-    return Promise.resolve(response.data)
-  },
+  response => response,
   err => {
     const error = {}
 
@@ -81,6 +79,7 @@ instance.interceptors.response.use(
         err.response.data.message ||
         err.response.statusText ||
         statusText[error.status.toString()]
+      error.data = err.response.data
     } else {
       error.status = 400
       error.message = err.message || statusText[error.status.toString()]
