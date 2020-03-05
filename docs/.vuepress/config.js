@@ -48,9 +48,10 @@ module.exports = {
     // custom text for edit link. Defaults to "Edit this page"
     // editLinkText: 'Help us improve this page',
     lastUpdated: 'Last Updated', // string | boolean
-    sidebarGroupOrder: [
-      'getting-started',
-      'configurations'
-    ],
+
+    // sidebarGroupOrder: [
+    //   'getting-started',
+    //   'configurations',
+    // ],
   },
 }

@@ -185,18 +185,19 @@ export default {
         this.$localePath
       )
 
-      const languageSelectText =
-        config.get(this.$site, 'selectText', this.$localePath) || 'languages'
+      const order = groupOrderConfig
+        ? groupOrderConfig.filter(item => !!this.items[item])
+        : Object.keys(this.items)
 
-      if (groupOrderConfig) {
-        const result = groupOrderConfig.slice()
+      const index = order.indexOf('home')
 
-        result.unshift('home')
-
-        return result
-      } else {
-        return Object.keys(this.items)
+      if (index !== -1) {
+        order.splice(index, 1)
       }
+
+      order.unshift('home')
+
+      return order
     },
     sidebars() {
       return this.sidebarGroupOrder

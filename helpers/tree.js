@@ -39,7 +39,7 @@ export function getDirTree($site, $localePath) {
     .forEach(item => {
       if (isHomePage(item.path, $localePath)) {
         sidebars['home'] = {
-          title: 'Homepage',
+          title: item.title,
           to: item.path,
           children: [],
         }
@@ -62,7 +62,12 @@ export function getDirTree($site, $localePath) {
       const maxLevel = getTopLevelOfHeaders(item.headers)
 
       // index page in this group
-      if (item.path === $localePath + groupName + '/') {
+      const regexp = new RegExp(
+        `^${$localePath.replace(/\//g, `\\/`)}\\d*[_-]*${groupName}\\/$`,
+        'g'
+      )
+
+      if (regexp.test(item.path)) {
         sidebars[groupName].title = item.title
         sidebars[groupName].to = item.path
         sidebars[groupName].headers = item.headers.filter(

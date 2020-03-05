@@ -36,9 +36,11 @@ export function splitWithBasePath(path, base) {
 }
 
 export function matchGroupNameFromPath(path, base) {
-  const relativePath = splitWithBasePath(path, base)
+  const name = splitWithBasePath(path, base)
+    .split('/')[0]
+    .split('.')[0]
 
-  return relativePath.split('/')[0]
+  return name.replace(/^\d+[_-]*/g, '')
 }
 
 export function matchFileName(path) {
