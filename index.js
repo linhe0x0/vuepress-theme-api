@@ -1,47 +1,37 @@
+const { defaultLocales, getDefaultLocales } = require('./helpers/locales')
+
+const locales = Object.keys(defaultLocales)
+
+const containerConfig = Object.keys(defaultLocales['/'].container).map(item => {
+  const defaultTitle = {}
+
+  locales.forEach(locale => {
+    defaultTitle[locale] = getDefaultLocales(locale, 'container', item)
+  })
+
+  return [
+    'container',
+    {
+      type: item,
+      defaultTitle,
+    },
+  ]
+})
+
+containerConfig.push([
+  'container',
+  {
+    type: 'details',
+    before: info =>
+      `<details class="custom-block details">${
+        info ? `<summary>${info}</summary>` : ''
+      }\n`,
+    after: () => '</details>\n',
+  },
+])
+
 module.exports = {
-  plugins: [
-    '@vuepress/active-header-links',
-    [
-      'container',
-      {
-        type: 'tip',
-        defaultTitle: {
-          '/': 'TIP',
-          '/zh/': '提示',
-        },
-      },
-    ],
-    [
-      'container',
-      {
-        type: 'warning',
-        defaultTitle: {
-          '/': 'WARNING',
-          '/zh/': '注意',
-        },
-      },
-    ],
-    [
-      'container',
-      {
-        type: 'danger',
-        defaultTitle: {
-          '/': 'WARNING',
-          '/zh/': '警告',
-        },
-      },
-    ],
-    [
-      'container',
-      {
-        type: 'details',
-        before: info =>
-          `<details class="custom-block details">${
-            info ? `<summary>${info}</summary>` : ''
-          }\n`,
-        after: () => '</details>\n',
-      },
-    ],
-    ['smooth-scroll', true],
-  ],
+  plugins: ['@vuepress/active-header-links', ['smooth-scroll', true]].concat(
+    containerConfig
+  ),
 }
