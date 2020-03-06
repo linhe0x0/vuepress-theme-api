@@ -62,12 +62,7 @@ export function getDirTree($site, $localePath) {
       const maxLevel = getTopLevelOfHeaders(item.headers)
 
       // index page in this group
-      const regexp = new RegExp(
-        `^${$localePath.replace(/\//g, `\\/`)}\\d*[_-]*${groupName}\\/$`,
-        'g'
-      )
-
-      if (regexp.test(item.path)) {
+      if (item.path === `${$localePath}${groupName}/`) {
         sidebars[groupName].title = item.title
         sidebars[groupName].to = item.path
         sidebars[groupName].headers = item.headers.filter(

@@ -17,7 +17,9 @@
       :key="sidebarGroupItem.to || index"
       class="group"
     >
-      <div class="group__title">{{ sidebarGroupOrder[index] }}</div>
+      <div class="group__title">
+        {{ sidebarGroupOrder[index].replace(/^\d+[_-]*/g, '') }}
+      </div>
       <div class="group__body">
         <!-- render README.md in this folder -->
         <div
@@ -195,6 +197,7 @@ export default {
         order.splice(index, 1)
       }
 
+      order.sort()
       order.unshift('home')
 
       return order
