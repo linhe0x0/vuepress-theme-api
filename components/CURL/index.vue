@@ -1,6 +1,6 @@
 <template>
   <div class="curl__container">
-    <div ref="curl">
+    <div ref="curl" class="curl__body" contenteditable>
       <slot></slot>
     </div>
     <Button :light="lightBtn" :loading="loading" @click="sendRequest"
@@ -138,3 +138,9 @@ export default {
   },
 }
 </script>
+
+<style lang="stylus">
+.curl
+  &__body
+    outline: none
+</style>
