@@ -184,7 +184,7 @@ export default {
 .page__container
   min-height: 100vh
   padding: 4rem 6rem 0
-  background-color: #fafafa
+  background-color: $gray
 
   .curl__container
     text-align: center
@@ -199,7 +199,7 @@ export default {
         width: 100%
         padding: 1rem 0 0
         margin: 0
-        background-color: #fafafa
+        background-color: $gray
 
       &__cont
         padding-top: 0
@@ -291,7 +291,7 @@ export default {
     padding: 0 3rem 2rem
 
   &__cont
-    background-color: #fafafa
+    background-color: $gray
 
   &__examples
     color: $white

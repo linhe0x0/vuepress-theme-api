@@ -1,28 +1,32 @@
 .custom-block
-  padding: 0.8rem 1.6rem
+  padding: 1em 1.6rem 1.5em
   border-left: 5px solid $black
-  color: #888
-  margin: 20px 0px
+  color: #666
+  margin: 1.5em 0px
+  background-color: $white
 
   .custom-block-title
-    margin-bottom: 1.4em
+    margin-bottom: 0.875em
     font-weight 600
     color: $black
 
   &.tip
-    border-color: $black
+    border-color: $info
+
+    .custom-block-title
+      color: $info
 
   &.warning
-    border-color: #ffcb1e
+    border-color: $warning
 
     .custom-block-title
-      color: #ffcb1e
+      color: $warning
 
   &.danger
-    border-color: #f5222d
+    border-color: $danger
 
     .custom-block-title
-      color: #f5222d
+      color: $danger
 
   p
     margin-bottom: 0

@@ -53,6 +53,7 @@ export default {
       appearance: none
       outline: none
       cursor: pointer
+      background-color: $gray
 
       &:hover
         border-color: #888
