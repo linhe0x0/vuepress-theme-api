@@ -144,7 +144,7 @@ export default {
   },
   computed: {
     shouldShowLangSelect() {
-      return this.$site.locales && Object.keys(this.$site.locales).length > 1
+      return Object.keys(this.$site.locales || {}).length > 1
     },
     languageSelectText() {
       return (
@@ -155,7 +155,7 @@ export default {
       return this.$page.path
     },
     localePathList() {
-      return Object.keys(this.$site.locales).map(locale => {
+      return Object.keys(this.$site.locales || {}).map(locale => {
         const item = this.$site.locales[locale]
         const languageTitle =
           config.get(this.$site, 'label', locale) || item.text || item.lang
