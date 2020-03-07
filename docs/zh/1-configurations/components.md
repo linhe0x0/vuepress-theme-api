@@ -80,6 +80,8 @@ Some examples...
 <CURL>
 ```bash
 curl -X POST https://api.example.com/v1/auth/login \
+  -H 'content-type: application/json' \
+  -H 'Authorization: Bearer <const name="MOCK_TOKEN" />' \
   --data '{
     "username": "my-username",
     "password": "my-password"
@@ -96,6 +98,8 @@ curl -X POST https://api.example.com/v1/auth/login \
 
 ```bash
 curl -X POST http://api.example.com/api/auth/login \
+  -H 'content-type: application/json' \
+  -H 'Authorization: Bearer <const name="MOCK_TOKEN" />' \
   --data '{
     "username": "my-username",
     "password": "my-password"

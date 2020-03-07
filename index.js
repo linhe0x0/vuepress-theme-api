@@ -31,7 +31,14 @@ containerConfig.push([
 ])
 
 module.exports = {
-  plugins: ['@vuepress/active-header-links', ['smooth-scroll', true]].concat(
-    containerConfig
-  ),
+  plugins: [
+    '@vuepress/active-header-links',
+    [
+      'define',
+      {
+        forceConvert: true,
+      },
+    ],
+    ['smooth-scroll', true],
+  ].concat(containerConfig),
 }
