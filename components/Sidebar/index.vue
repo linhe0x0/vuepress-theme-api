@@ -1,9 +1,9 @@
 <template>
   <div ref="container" class="sidebar" :style="{ width: containerWidth }">
-    <div class="group">
+    <div class="group" v-if="shouldShowLangSelect">
       <div class="group__title">{{ languageSelectText }}</div>
       <div class="group__body">
-        <div v-if="shouldShowLangSelect" class="sidebar__lang">
+        <div class="sidebar__lang">
           <Select
             :options="localePathList"
             :value="currentPagePath"
@@ -144,7 +144,7 @@ export default {
   },
   computed: {
     shouldShowLangSelect() {
-      return Object.keys(this.$site.locales).length > 1
+      return this.$site.locales && Object.keys(this.$site.locales).length > 1
     },
     languageSelectText() {
       return (
