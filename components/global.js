@@ -8,6 +8,7 @@ import Select from './Select'
 import Menubar from './Menubar'
 import Blank from './Blank'
 import NetworkPanel from './NetworkPanel'
+import Search from './Search'
 
 const components = [
   Button,
@@ -19,6 +20,7 @@ const components = [
   Menubar,
   Blank,
   NetworkPanel,
+  Search,
 ]
 
 const install = Vue => {

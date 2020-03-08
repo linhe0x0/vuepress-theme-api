@@ -1,6 +1,12 @@
 <template>
   <div ref="container" class="sidebar" :style="{ width: containerWidth }">
-    <div class="group" v-if="shouldShowLangSelect">
+    <div class="group">
+      <div class="group__title">Search</div>
+      <div class="group__body">
+        <Search v-model="searchKeyword" :options="searchedOptions" />
+      </div>
+    </div>
+    <div v-if="shouldShowLangSelect" class="group">
       <div class="group__title">{{ languageSelectText }}</div>
       <div class="group__body">
         <div class="sidebar__lang">
@@ -140,9 +146,51 @@ export default {
   data() {
     return {
       containerWidth: '100%',
+      searchKeyword: '',
     }
   },
   computed: {
+    searchedOptions() {
+      const results = []
+
+      this.sidebars.forEach(item => {
+        results.push({
+          to: item.to,
+          text: item.title,
+        })
+
+        if (item.headers) {
+          item.headers.forEach(header => {
+            results.push({
+              to: `${item.to}#${header.slug}`,
+              text: header.title,
+            })
+          })
+        }
+
+        if (item.children) {
+          item.children.forEach(child => {
+            results.push({
+              to: child.to,
+              text: child.title,
+            })
+
+            if (child.headers) {
+              child.headers.forEach(h => {
+                results.push({
+                  to: `${child.to}#${h.slug}`,
+                  text: h.title,
+                })
+              })
+            }
+          })
+        }
+      })
+
+      return results.filter(item =>
+        item.text.toLowerCase().includes(this.searchKeyword.toLowerCase())
+      )
+    },
     shouldShowLangSelect() {
       return Object.keys(this.$site.locales || {}).length > 1
     },

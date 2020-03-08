@@ -96,7 +96,6 @@ export default {
       padding: 0.625rem 2rem
       font-size: 0
       text-align: right
-      background-color: $white
 
 @media screen and (min-width: $container-max-widths.md)
   .menu__container
