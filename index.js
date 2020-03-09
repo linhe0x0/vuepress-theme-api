@@ -33,6 +33,7 @@ containerConfig.push([
 module.exports = {
   plugins: [
     '@vuepress/active-header-links',
+    '@vuepress/last-updated',
     [
       'define',
       {

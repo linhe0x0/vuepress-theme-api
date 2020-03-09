@@ -34,6 +34,7 @@
 
 <script>
 import { isExternalLink } from '../helpers/is'
+import config from '../helpers/config'
 import { getDefaultLocales } from '../helpers/locales'
 
 const isHeading = el => {
@@ -62,10 +63,16 @@ export default {
       }
     },
     lastUpdated() {
-      return this.$page.lastUpdated
+      return (
+        this.$site.themeConfig.lastUpdated !== false && this.$page.lastUpdated
+      )
     },
     lastUpdatedText() {
-      if (typeof this.$site.themeConfig.lastUpdated === 'string') {
+      const lastUpdated =
+        this.$site.themeConfig.lastUpdated ||
+        config.get(this.$site, 'lastUpdated', this.$localePath)
+
+      if (typeof lastUpdated === 'string') {
         return this.$site.themeConfig.lastUpdated
       }
 
