@@ -1,7 +1,7 @@
 <template>
   <div :class="pageClasses">
     <Content custom />
-    <div class="content__footer-container">
+    <div v-if="lastUpdated || editLink" class="content__footer-container">
       <div class="content__footer">
         <div v-if="lastUpdated" class="last-updated">
           <span class="prefix">{{ lastUpdatedText }}:</span>
@@ -34,6 +34,7 @@
 
 <script>
 import { isExternalLink } from '../helpers/is'
+import { getDefaultLocales } from '../helpers/locales'
 
 const isHeading = el => {
   const tagname = el.tagName.toLowerCase()
@@ -68,7 +69,7 @@ export default {
         return this.$site.themeConfig.lastUpdated
       }
 
-      return 'Last Updated'
+      return getDefaultLocales(this.$localePath, 'lastUpdated')
     },
     editLink() {
       if (this.$page.frontmatter.editLink === false) {
@@ -107,7 +108,10 @@ export default {
       return ''
     },
     editLinkText() {
-      return this.$site.themeConfig.editLinkText || `Edit this page`
+      return (
+        this.$site.themeConfig.editLinkText ||
+        getDefaultLocales(this.$localePath, 'editLinkText')
+      )
     },
   },
   watch: {
@@ -229,6 +233,9 @@ export default {
   color: #999
 
   .edit-link
+    display: flex
+    align-items: center
+
     a
       margin-right: 0.5em
       font-weight: 600

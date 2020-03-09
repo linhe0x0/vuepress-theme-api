@@ -6,7 +6,7 @@ const containerConfig = Object.keys(defaultLocales['/'].container).map(item => {
   const defaultTitle = {}
 
   locales.forEach(locale => {
-    defaultTitle[locale] = getDefaultLocales(locale, 'container', item)
+    defaultTitle[locale] = getDefaultLocales(locale, `container.${item}`)
   })
 
   return [

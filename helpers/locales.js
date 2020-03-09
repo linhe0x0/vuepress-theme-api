@@ -1,6 +1,8 @@
 // The file must be commonjs module due to /index.js.
 exports.defaultLocales = {
   '/': {
+    lastUpdated: 'Last Updated',
+    editLinkText: 'Edit this page',
     container: {
       tip: 'TIP',
       warning: 'WARNING',
@@ -8,6 +10,8 @@ exports.defaultLocales = {
     },
   },
   '/zh/': {
+    lastUpdated: '上次更新',
+    editLinkText: '编辑此页面',
     container: {
       tip: '提示',
       warning: '注意',
@@ -16,14 +20,12 @@ exports.defaultLocales = {
   },
 }
 
-exports.getDefaultLocales = ($locale, scope, prop) => {
-  try {
-    return exports.defaultLocales[$locale][scope][prop]
-  } catch (_err) {}
+exports.getDefaultLocales = ($locale, path) => {
+  let value = exports.defaultLocales[$locale]
 
-  try {
-    return exports.defaultLocales['/'][scope][prop]
-  } catch (_err) {}
+  path.split('.').forEach(item => {
+    value = value[item]
+  })
 
-  return ''
+  return value
 }
