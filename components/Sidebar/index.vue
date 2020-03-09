@@ -154,10 +154,12 @@ export default {
       const results = []
 
       this.sidebars.forEach(item => {
-        results.push({
-          to: item.to,
-          text: item.title,
-        })
+        if (item.to) {
+          results.push({
+            to: item.to,
+            text: item.title,
+          })
+        }
 
         if (item.headers) {
           item.headers.forEach(header => {
