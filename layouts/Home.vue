@@ -31,14 +31,10 @@ export default {
       return this.$page.frontmatter
     },
     title() {
-      return this.$page.frontmatter.title || this.$title || 'Hello, World.'
+      return this.$page.frontmatter.title || this.$title || ''
     },
     description() {
-      return (
-        this.$page.description ||
-        this.$description ||
-        '📦 🎨 A api-friendly theme for VuePress.'
-      )
+      return this.$page.description || this.$description || ''
     },
     action() {
       return {
