@@ -190,7 +190,9 @@ export default {
       })
 
       return results.filter(item =>
-        item.text.toLowerCase().includes(this.searchKeyword.toLowerCase())
+        (item.text || '')
+          .toLowerCase()
+          .includes(this.searchKeyword.toLowerCase())
       )
     },
     shouldShowLangSelect() {
