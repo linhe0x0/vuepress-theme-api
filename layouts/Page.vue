@@ -195,6 +195,7 @@ export default {
 .page__container
   min-height: 100vh
   padding: 4rem 6rem 0
+  overflow: auto
   background-color: $gray
 
   .curl__container
