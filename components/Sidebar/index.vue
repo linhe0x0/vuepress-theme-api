@@ -319,7 +319,6 @@ export default {
 
   &__label,
   &__header-item
-    height: 2em
     margin: 0.6em 0
     line-height: 2em
 
