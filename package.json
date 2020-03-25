@@ -35,8 +35,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@vuepress/plugin-active-header-links": "^1.3.1",
-    "@vuepress/plugin-last-updated": "^1.3.1",
+    "@vuepress/plugin-active-header-links": "^1.4.0",
+    "@vuepress/plugin-last-updated": "^1.4.0",
     "axios": "^0.19.2",
     "vuepress-plugin-define": "^1.1.1"
   },
@@ -48,6 +48,6 @@
     "eslint-plugin-vue": "^6.2.2",
     "gh-pages": "^2.2.0",
     "prettier": "^1.19.1",
-    "vuepress": "^1.3.1"
+    "vuepress": "^1.4.0"
   }
 }
