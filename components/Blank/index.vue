@@ -24,8 +24,7 @@ export default {
 }
 </script>
 
-<style>
-.blank {
-  width: 100%;
-}
+<style lang="stylus">
+.blank
+  width: 100%
 </style>
