@@ -94,7 +94,7 @@ export default {
       default: () => null,
     },
     response: {
-      type: [Object, Array, String, Null],
+      type: [Object, Array, String, null],
       default: () => null,
     },
     statusCode: {
