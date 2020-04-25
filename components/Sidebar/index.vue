@@ -1,5 +1,10 @@
 <template>
-  <div ref="container" class="sidebar" :style="{ width: containerWidth }">
+  <div
+    ref="container"
+    class="sidebar"
+    :style="{ width: containerWidth }"
+    @click="savePosition"
+  >
     <div class="group">
       <div class="group__title">Search</div>
       <div class="group__body">
@@ -34,8 +39,9 @@
             'group__category',
             'category',
             {
-              'category--selected': $route.fullPath === sidebarGroupItem.to,
-              'category--active': $route.fullPath === sidebarGroupItem.to,
+              'category--selected':
+                currentRouteFullPath === sidebarGroupItem.to,
+              'category--active': currentRouteFullPath === sidebarGroupItem.to,
             },
           ]"
         >
@@ -60,9 +66,11 @@
               'category',
               {
                 'category--selected':
-                  $route.fullPath === `${sidebarGroupItem.to}#${header.slug}`,
+                  currentRouteFullPath ===
+                  `${sidebarGroupItem.to}#${header.slug}`,
                 'category--active':
-                  $route.fullPath === `${sidebarGroupItem.to}#${header.slug}`,
+                  currentRouteFullPath ===
+                  `${sidebarGroupItem.to}#${header.slug}`,
               },
             ]"
           >
@@ -90,7 +98,7 @@
                 'category--selected':
                   !child.isLangNav && $route.path === child.to,
                 'category--active':
-                  !child.isLangNav && $route.fullPath === child.to,
+                  !child.isLangNav && currentRouteFullPath === child.to,
               },
             ]"
           >
@@ -107,7 +115,7 @@
                   'category__headers',
                   {
                     'category--active':
-                      $route.fullPath === `${child.to}#${header.slug}`,
+                      currentRouteFullPath === `${child.to}#${header.slug}`,
                   },
                 ]"
               >
@@ -206,6 +214,9 @@ export default {
     currentPagePath() {
       return this.$page.path
     },
+    currentRouteFullPath() {
+      return decodeURIComponent(this.$route.fullPath)
+    },
     localePathList() {
       return Object.keys(this.$site.locales || {}).map(locale => {
         const item = this.$site.locales[locale]
@@ -264,6 +275,7 @@ export default {
   },
   mounted() {
     this.refreshContainerWidth()
+    this.checkActiveSidebarItem()
 
     window.addEventListener('resize', this.refreshContainerWidth)
   },
@@ -280,6 +292,44 @@ export default {
         .width
 
       this.containerWidth = width ? `${width}px` : '100%'
+    },
+    savePosition() {
+      const top = this.$refs.container.scrollTop
+
+      window.localStorage.setItem('vuepress_theme_api_sidebar_position', top)
+    },
+    restorePosition() {
+      const lastPosition = parseInt(
+        window.localStorage.getItem('vuepress_theme_api_sidebar_position'),
+        10
+      )
+
+      if (lastPosition) {
+        this.$refs.container.scrollTop = lastPosition
+        return
+      }
+    },
+    checkActiveSidebarItem() {
+      const el = this.$refs.container.querySelector('.category--active')
+
+      if (!el) {
+        this.restorePosition()
+
+        return
+      }
+
+      const viewPortHeight = document.documentElement.clientHeight
+      const { top } = el.getBoundingClientRect()
+
+      const visible = top < viewPortHeight
+
+      if (visible) {
+        this.restorePosition()
+      } else {
+        this.$refs.container.scrollTop = top - 100
+
+        this.savePosition()
+      }
     },
   },
 }
@@ -342,7 +392,8 @@ export default {
   &:hover &__label,
   &__headers:hover,
   &--active &__label,
-  &--active&__headers
+  &--active&__headers,
+  .router-link-exact-active
     font-weight: 600
     border-left-color: $black
 
