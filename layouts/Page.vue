@@ -1,8 +1,12 @@
 <template>
   <div :class="pageClasses">
     <Content custom />
-    <div class="content__footer-container">
+    <div v-if="lastUpdated || editLink" class="content__footer-container">
       <div class="content__footer">
+        <div v-if="lastUpdated" class="last-updated">
+          <span class="prefix">{{ lastUpdatedText }}:</span>
+          <span class="time">{{ lastUpdated }}</span>
+        </div>
         <div v-if="editLink" class="edit-link">
           <a :href="editLink" target="_blank" rel="noopener noreferrer">{{
             editLinkText
@@ -14,33 +18,24 @@
             height="16"
             width="16"
           >
-            <g
-              id="Page-1"
-              stroke="none"
-              stroke-width="1"
-              fill="none"
-              fill-rule="evenodd"
-            >
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="github" fill="#000">
                 <path
                   d="M16.3,0 C7.3,0 -3.55271368e-15,7.3 -3.55271368e-15,16.3 C-3.55271368e-15,23.5 4.7,29.6 11.1,31.8 C11.9,31.9 12.2,31.4 12.2,31 L12.2,28.2 C7.7,29.2 6.7,26 6.7,26 C6,24.2 5,23.7 5,23.7 C3.5,22.7 5.1,22.7 5.1,22.7 C6.7,22.8 7.6,24.4 7.6,24.4 C9.1,26.9 11.4,26.2 12.3,25.8 C12.4,24.7 12.9,24 13.3,23.6 C9.7,23.2 5.9,21.8 5.9,15.5 C5.9,13.7 6.5,12.3 7.6,11.1 C7.4,10.7 6.9,9 7.8,6.8 C7.8,6.8 9.2,6.4 12.3,8.5 C13.6,8.1 15,8 16.4,8 C17.8,8 19.2,8.2 20.5,8.5 C23.6,6.4 25,6.8 25,6.8 C25.9,9 25.3,10.7 25.2,11.1 C26.2,12.2 26.9,13.7 26.9,15.5 C26.9,21.8 23.1,23.1 19.5,23.5 C20.1,24 20.6,25 20.6,26.5 L20.6,31 C20.6,31.4 20.9,31.9 21.7,31.8 C28.2,29.6 32.8,23.5 32.8,16.3 C32.6,7.3 25.3,0 16.3,0 L16.3,0 Z"
-                  id="Shape"
                 />
               </g>
             </g>
           </svg>
         </div>
-        <time v-if="lastUpdated" class="last-updated">
-          <span class="prefix">{{ lastUpdatedText }}:</span>
-          <span class="time">{{ lastUpdated }}</span>
-        </time>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { isExternalLink } from './utils'
+import { isExternalLink } from '../helpers/is'
+import config from '../helpers/config'
+import { getDefaultLocales } from '../helpers/locales'
 
 const isHeading = el => {
   const tagname = el.tagName.toLowerCase()
@@ -68,20 +63,24 @@ export default {
       }
     },
     lastUpdated() {
-      if (this.$page.lastUpdated) {
-        return new Date(this.$page.lastUpdated).toLocaleString(this.$lang)
-      }
+      return (
+        this.$site.themeConfig.lastUpdated !== false && this.$page.lastUpdated
+      )
     },
     lastUpdatedText() {
-      if (typeof this.$site.themeConfig.lastUpdated === 'string') {
+      const lastUpdated =
+        this.$site.themeConfig.lastUpdated ||
+        config.get(this.$site, 'lastUpdated', this.$localePath)
+
+      if (typeof lastUpdated === 'string') {
         return this.$site.themeConfig.lastUpdated
       }
 
-      return 'Last Updated'
+      return getDefaultLocales(this.$localePath, 'lastUpdated')
     },
     editLink() {
       if (this.$page.frontmatter.editLink === false) {
-        return
+        return ''
       }
 
       const {
@@ -112,9 +111,14 @@ export default {
           path
         )
       }
+
+      return ''
     },
     editLinkText() {
-      return this.$site.themeConfig.editLinkText || `Edit this page`
+      return (
+        this.$site.themeConfig.editLinkText ||
+        getDefaultLocales(this.$localePath, 'editLinkText')
+      )
     },
   },
   watch: {
@@ -128,6 +132,14 @@ export default {
         this.$nextTick(this.resolveLayout)
       }
     },
+  },
+  mounted() {
+    if (this.isEnchanceMode) {
+      this.$nextTick(this.resolveLayout)
+    }
+  },
+  created() {
+    this.$on('addBlock', this.addBlock)
   },
   methods: {
     resolveLayout() {
@@ -174,23 +186,17 @@ export default {
       this.blocks.push(block)
     },
   },
-  mounted() {
-    if (this.isEnchanceMode) {
-      this.$nextTick(this.resolveLayout)
-    }
-  },
-  created() {
-    this.$on('addBlock', this.addBlock)
-  },
 }
 </script>
 
 <style lang="stylus">
-@import './styles/_variables.styl'
+@import '../styles/_variables.styl'
 
 .page__container
   min-height: 100vh
   padding: 4rem 6rem 0
+  overflow: auto
+  background-color: $gray
 
   .curl__container
     text-align: center
@@ -198,28 +204,34 @@ export default {
   @media screen and (max-width: $container-max-widths.md)
     padding: 2rem 2rem 0
 
-    .content-block__heading, .content-block__cont, .content-block
-      width: 100%
-      padding: 1rem 0 0 0
-      margin: 0
-      background-color: $white
+    .content-block
+      &,
+      &__cont,
+      &__heading
+        width: 100%
+        padding: 1rem 0 0
+        margin: 0
+        background-color: $gray
 
-    .content-block__examples
-      padding: 0
-      margin: 0
-      width: 100%
+      &__cont
+        padding-top: 0
+
+      &::after
+        background-image: none
+
+      &__body
+        flex-direction: column
+
+      &__examples
+        padding: 0
+        margin: 0
+        width: 100%
 
     .examples
       width: 100%
       padding: 1rem
       background-color: $black
       border-radius: 6px
-
-    .content-block__body
-      flex-direction: column
-
-    .content-block::after
-      background-image: none
 
 .content__footer
   display: flex
@@ -229,6 +241,9 @@ export default {
   color: #999
 
   .edit-link
+    display: flex
+    align-items: center
+
     a
       margin-right: 0.5em
       font-weight: 600
@@ -272,28 +287,32 @@ export default {
 
     h1,
     h2,
-    h3
+    h3,
+    h4,
+    h5,
+    h6
       padding: 4rem 3rem 0
+
+      @media screen and (max-width: $container-max-widths.md)
+        padding: 0
 
   &__body
     display: flex
     overflow-x: hidden
 
-  &__cont, &__examples
+  &__cont,
+  &__examples
     width: 50%
     padding: 0 3rem 2rem
 
   &__cont
-    background-color: #fafafa
+    background-color: $gray
 
   &__examples
     color: $white
 
     .btn
       margin: 2em 0
-
-    p
-      font-size: 12px
 
     // reset style
     blockquote

@@ -15,25 +15,27 @@
 <script>
 export default {
   name: 'Block',
+  mounted() {
+    this.resolveLayout()
+
+    this.$parent.$parent.$emit('addBlock', this)
+  },
   methods: {
     resolveLayout() {
-      const heading = this.$el.querySelector('h1, h2')
+      const heading = this.$el.querySelector('h1, h2, h3, h4, h5, h6')
 
       if (heading) {
         this.$refs['heading-box'].appendChild(heading)
       }
 
-      const examples = this.$refs['cont-box'].querySelector('.examples')
+      const examples = this.$refs['cont-box'].querySelectorAll('.examples')
 
       if (examples) {
-        this.$refs['example-box'].appendChild(examples)
+        examples.forEach(item => {
+          this.$refs['example-box'].appendChild(item)
+        })
       }
     },
-  },
-  mounted() {
-    this.resolveLayout()
-
-    this.$parent.$parent.$emit('addBlock', this)
   },
 }
 </script>

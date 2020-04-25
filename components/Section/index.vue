@@ -1,7 +1,7 @@
 <template>
-  <section :class="classes" ref="section">
+  <section ref="section" :class="classes">
     <div class="container">
-      <div class="row enhance-mode__homepage" v-if="isHomepage">
+      <div v-if="isHomepage" class="row enhance-mode__homepage">
         <div class="col-md-10">
           <slot></slot>
         </div>
@@ -44,6 +44,11 @@ export default {
       ]
     },
   },
+  mounted() {
+    if (this.enhanceMode) {
+      this.enhance()
+    }
+  },
   methods: {
     enhance() {
       const sectionElement = this.$refs.section
@@ -54,11 +59,6 @@ export default {
       sectionElement.style.marginLeft = `${-(clientWidth - originalWidth) /
         2}px`
     },
-  },
-  mounted() {
-    if (this.enhanceMode) {
-      this.enhance()
-    }
   },
 }
 </script>

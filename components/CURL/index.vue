@@ -1,23 +1,26 @@
 <template>
   <div class="curl__container">
-    <div ref="curl">
+    <div ref="curl" class="curl__body" contenteditable>
       <slot></slot>
     </div>
     <Button :light="lightBtn" :loading="loading" @click="sendRequest"
       >Send request now</Button
     >
+    <NetworkPanel :visible.sync="networkPanelVisible" v-bind="networkData" />
   </div>
 </template>
 
 <script>
 import nprogress from 'nprogress'
 
-import request from '../../request'
-import { isJSON, isQueryString, parseQueryString } from '../../utils'
-import curl from '../../curl'
+import request from '../../helpers/request'
+import curl from '../../helpers/curl'
+import { isJSON, isQueryString } from '../../helpers/is'
 
 // configure progress bar
-nprogress.configure({ showSpinner: false })
+nprogress.configure({
+  showSpinner: false,
+})
 
 export default {
   name: 'CURL',
@@ -25,9 +28,27 @@ export default {
     return {
       lightBtn: true,
       loading: false,
+      networkPanelVisible: false,
+      networkData: {
+        method: '',
+        url: '',
+        headers: {},
+        request: {},
+        response: {},
+        stautsCode: '',
+        statusText: '',
+      },
+    }
+  },
+  mounted() {
+    if (this.notInExampleBox()) {
+      this.lightBtn = false
     }
   },
   methods: {
+    openNetworkPanel() {
+      this.networkPanelVisible = true
+    },
     sendRequest() {
       const cmd = this.$refs.curl.outerText.trim()
 
@@ -43,11 +64,16 @@ export default {
       }
 
       console.clear()
-      console.log('====== DEBUG INFO ======')
+      console.log('====== DEBUG INFO BEGIN ======')
       console.info(`=> ${options.method.toUpperCase()} ${options.url}`)
+
+      this.networkData.method = options.method.toUpperCase()
+      this.networkData.url = options.url
 
       if (options.headers) {
         console.info('=> Headers:', options.headers)
+
+        this.networkData.headers = options.headers
       }
 
       if (options.params) {
@@ -56,6 +82,8 @@ export default {
 
       if (options.data) {
         console.info('=> Data:', options.data)
+
+        this.networkData.data = options.data
       }
 
       this.openLoading()
@@ -63,19 +91,35 @@ export default {
       request(options)
         .then(data => {
           this.closeLoading()
+
           this.$message.success(
-            'Request success. Open console to get more details.'
+            `${data.status} ${data.data.message || data.statusText}`
           )
 
-          console.info('<=', data)
+          this.networkData.statusCode = `${data.status}`
+          this.networkData.statusText = data.statusText
+          this.networkData.response = data.data
+
+          console.info('<=', data.status, data.statusText)
+          console.info('<=', 'data:', data.data)
         })
         .catch(err => {
           this.closeLoading()
-          this.$message.error(
-            `${err.status} ${err.message}. Open console to get more details.`
-          )
+
+          this.$message.error(`${err.status} ${err.message}`)
+
+          this.networkData.statusCode = `${err.status}`
+          this.networkData.statusText = err.message
+          this.networkData.response = err.data
 
           console.error('<=', err)
+        })
+        .finally(() => {
+          console.log('====== DEBUG INFO END ======')
+
+          setTimeout(() => {
+            this.openNetworkPanel()
+          }, 300)
         })
     },
     notInExampleBox() {
@@ -92,10 +136,11 @@ export default {
       nprogress.done()
     },
   },
-  mounted() {
-    if (this.notInExampleBox()) {
-      this.lightBtn = false
-    }
-  },
 }
 </script>
+
+<style lang="stylus">
+.curl
+  &__body
+    outline: none
+</style>

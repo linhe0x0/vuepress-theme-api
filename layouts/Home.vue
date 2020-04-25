@@ -17,8 +17,8 @@
 <script>
 import MarkdownIt from 'markdown-it'
 
-import { localizePath } from './utils'
-import Button from './components/Button'
+import { localizePath } from '../helpers/path'
+import Button from '../components/Button'
 
 const md = new MarkdownIt()
 
@@ -31,14 +31,10 @@ export default {
       return this.$page.frontmatter
     },
     title() {
-      return this.$page.frontmatter.title || this.$title || 'Hello, World.'
+      return this.$page.frontmatter.title || this.$title || ''
     },
     description() {
-      return (
-        this.$page.description ||
-        this.$description ||
-        '📦 🎨 A api-friendly theme for VuePress.'
-      )
+      return this.$page.description || this.$description || ''
     },
     action() {
       return {
@@ -59,7 +55,7 @@ export default {
 </script>
 
 <style lang="stylus">
-@import './styles/_variables.styl'
+@import '../styles/_variables.styl'
 
 .home
   &__header
@@ -83,7 +79,7 @@ export default {
   &__content
     padding: 6rem 4rem
     border-top: 1px solid $divider-color
-  
+
   &__footer
     margin-bottom: 3rem
     margin-left: 4rem

@@ -27,6 +27,7 @@ export default {
 }
 </script>
 
+<style src="../styles/theme.styl" lang="stylus"></style>
 <style lang="stylus" scoped>
 .notfound-page
   display: flex
@@ -41,6 +42,7 @@ export default {
   margin-bottom: 24px
 
   h1
+    padding: 0
     margin: 0
     font-size: 20px
     font-weight: 500
