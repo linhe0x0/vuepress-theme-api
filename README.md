@@ -1,6 +1,6 @@
-> v1.0 is under active development ([v1.0.0](https://github.com/sqrthree/vuepress-theme-api/tree/v1.0.0) ), going to release in the next two months.
+> v1.0.0 is beta, going to release in the next few days.
 >
-> Before that, only PRs with bug fix will be merged into the master branch.
+> All planned features have been implemented. The documents will be updated in the next few days.
 
 ---
 
