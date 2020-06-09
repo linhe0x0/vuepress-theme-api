@@ -161,7 +161,7 @@ export default {
     searchedOptions() {
       const results = []
 
-      this.sidebars.forEach(item => {
+      this.sidebars.forEach((item) => {
         if (item.to) {
           results.push({
             to: item.to,
@@ -170,7 +170,7 @@ export default {
         }
 
         if (item.headers) {
-          item.headers.forEach(header => {
+          item.headers.forEach((header) => {
             results.push({
               to: `${item.to}#${header.slug}`,
               text: header.title,
@@ -179,14 +179,14 @@ export default {
         }
 
         if (item.children) {
-          item.children.forEach(child => {
+          item.children.forEach((child) => {
             results.push({
               to: child.to,
               text: child.title,
             })
 
             if (child.headers) {
-              child.headers.forEach(h => {
+              child.headers.forEach((h) => {
                 results.push({
                   to: `${child.to}#${h.slug}`,
                   text: h.title,
@@ -197,7 +197,7 @@ export default {
         }
       })
 
-      return results.filter(item =>
+      return results.filter((item) =>
         (item.text || '')
           .toLowerCase()
           .includes(this.searchKeyword.toLowerCase())
@@ -218,7 +218,7 @@ export default {
       return decodeURIComponent(this.$route.fullPath)
     },
     localePathList() {
-      return Object.keys(this.$site.locales || {}).map(locale => {
+      return Object.keys(this.$site.locales || {}).map((locale) => {
         const item = this.$site.locales[locale]
         const languageTitle =
           config.get(this.$site, 'label', locale) || item.text || item.lang
@@ -230,7 +230,7 @@ export default {
         } else {
           path = this.$page.path.replace(this.$localePath, item.path) // Try to stay on the same page
 
-          const notFound = !this.$site.pages.some(page => page.path === path)
+          const notFound = !this.$site.pages.some((page) => page.path === path)
 
           if (notFound) {
             path = item.path // Fallback to homepage
@@ -251,7 +251,7 @@ export default {
       )
 
       const order = groupOrderConfig
-        ? groupOrderConfig.filter(item => !!this.items[item])
+        ? groupOrderConfig.filter((item) => !!this.items[item])
         : Object.keys(this.items)
 
       const index = order.indexOf('home')
@@ -267,10 +267,10 @@ export default {
     },
     sidebars() {
       return this.sidebarGroupOrder
-        .map(item => {
+        .map((item) => {
           return this.items[item]
         })
-        .filter(item => item)
+        .filter((item) => item)
     },
   },
   mounted() {
@@ -294,6 +294,10 @@ export default {
       this.containerWidth = width ? `${width}px` : '100%'
     },
     savePosition() {
+      if (!this.$refs.container) {
+        return
+      }
+
       const top = this.$refs.container.scrollTop
 
       window.localStorage.setItem('vuepress_theme_api_sidebar_position', top)
