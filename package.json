@@ -37,7 +37,7 @@
   "dependencies": {
     "@vuepress/plugin-active-header-links": "^1.4.1",
     "@vuepress/plugin-last-updated": "^1.4.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "vuepress-plugin-define": "^1.1.1"
   },
   "devDependencies": {
