@@ -37,7 +37,7 @@ import { isExternalLink } from '../helpers/is'
 import config from '../helpers/config'
 import { getDefaultLocales } from '../helpers/locales'
 
-const isHeading = el => {
+const isHeading = (el) => {
   const tagname = el.tagName.toLowerCase()
 
   return tagname === 'h1' || tagname === 'h2'
@@ -147,7 +147,7 @@ export default {
 
       let html = ''
 
-      Array.from(contentContainer.children).forEach(el => {
+      Array.from(contentContainer.children).forEach((el) => {
         if (isHeading(el)) {
           if (html) {
             html += `

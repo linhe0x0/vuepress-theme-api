@@ -23,7 +23,7 @@ exports.defaultLocales = {
 exports.getDefaultLocales = ($locale, path) => {
   let value = exports.defaultLocales[$locale]
 
-  path.split('.').forEach(item => {
+  path.split('.').forEach((item) => {
     value = value[item]
   })
 

@@ -114,7 +114,7 @@ export default {
   computed: {
     headerTexts() {
       return Object.keys(this.headers)
-        .map(item => `${item}: ${this.headers[item]}`)
+        .map((item) => `${item}: ${this.headers[item]}`)
         .join('\n')
     },
   },
@@ -127,7 +127,7 @@ export default {
       } else {
         document.body.className = document.body.className
           .split(' ')
-          .filter(item => item !== 'global-style__body__scroll-disabled')
+          .filter((item) => item !== 'global-style__body__scroll-disabled')
           .join(' ')
       }
     },

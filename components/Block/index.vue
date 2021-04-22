@@ -31,7 +31,7 @@ export default {
       const examples = this.$refs['cont-box'].querySelectorAll('.examples')
 
       if (examples) {
-        examples.forEach(item => {
+        examples.forEach((item) => {
           this.$refs['example-box'].appendChild(item)
         })
       }

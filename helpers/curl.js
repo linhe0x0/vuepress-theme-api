@@ -1,6 +1,6 @@
 import { isURL, isJSON, isQueryString } from './is'
 
-const parseField = s => {
+const parseField = (s) => {
   return s.split(/: (.+)/)
 }
 
@@ -13,7 +13,7 @@ export default function curl(cmd) {
 
   const args = cmd
     .match(/"[^"]+"|'[^']+'|\S+/g)
-    .filter(item => item.trim() !== '\\')
+    .filter((item) => item.trim() !== '\\')
 
   const result = {
     method: 'GET',
@@ -22,7 +22,7 @@ export default function curl(cmd) {
 
   let state = ''
 
-  args.forEach(function(arg) {
+  args.forEach(function (arg) {
     switch (true) {
       case isURL(arg):
         result.url = arg

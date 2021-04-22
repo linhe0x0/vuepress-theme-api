@@ -23,8 +23,8 @@ const components = [
   Search,
 ]
 
-const install = Vue => {
-  components.forEach(component => {
+const install = (Vue) => {
+  components.forEach((component) => {
     Vue.component(component.name, component)
   })
 

@@ -2,27 +2,29 @@ const { defaultLocales, getDefaultLocales } = require('./helpers/locales')
 
 const locales = Object.keys(defaultLocales)
 
-const containerConfig = Object.keys(defaultLocales['/'].container).map(item => {
-  const defaultTitle = {}
+const containerConfig = Object.keys(defaultLocales['/'].container).map(
+  (item) => {
+    const defaultTitle = {}
 
-  locales.forEach(locale => {
-    defaultTitle[locale] = getDefaultLocales(locale, `container.${item}`)
-  })
+    locales.forEach((locale) => {
+      defaultTitle[locale] = getDefaultLocales(locale, `container.${item}`)
+    })
 
-  return [
-    'container',
-    {
-      type: item,
-      defaultTitle,
-    },
-  ]
-})
+    return [
+      'container',
+      {
+        type: item,
+        defaultTitle,
+      },
+    ]
+  }
+)
 
 containerConfig.push([
   'container',
   {
     type: 'details',
-    before: info =>
+    before: (info) =>
       `<details class="custom-block details">${
         info ? `<summary>${info}</summary>` : ''
       }\n`,

@@ -56,8 +56,9 @@ export default {
       const originalWidth = sectionElement.offsetWidth
 
       sectionElement.style.width = `${clientWidth}px`
-      sectionElement.style.marginLeft = `${-(clientWidth - originalWidth) /
-        2}px`
+      sectionElement.style.marginLeft = `${
+        -(clientWidth - originalWidth) / 2
+      }px`
     },
   },
 }

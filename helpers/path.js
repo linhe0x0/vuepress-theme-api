@@ -9,7 +9,7 @@ export function normalize(path) {
 
   let p = path
     .split('/')
-    .filter(item => !!item)
+    .filter((item) => !!item)
     .join('/')
 
   if (p && trailingSlash) {
@@ -36,9 +36,7 @@ export function splitWithBasePath(path, base) {
 }
 
 export function matchGroupNameFromPath(path, base) {
-  return splitWithBasePath(path, base)
-    .split('/')[0]
-    .split('.')[0]
+  return splitWithBasePath(path, base).split('/')[0].split('.')[0]
 }
 
 export function matchFileName(path) {
@@ -52,7 +50,7 @@ export function matchFileName(path) {
 }
 
 export function matchLocalePathFromPath(path, locales) {
-  const localeList = Object.keys(locales).filter(item => item !== '/') // omit '/'
+  const localeList = Object.keys(locales).filter((item) => item !== '/') // omit '/'
 
   for (let i = 0, len = localeList.length; i < len; i++) {
     const localePath = localeList[i]

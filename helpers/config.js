@@ -1,4 +1,4 @@
-const hasValue = target => target !== undefined && target !== null
+const hasValue = (target) => target !== undefined && target !== null
 
 const getWithPath = (object, path) => {
   const p = path.split('.')

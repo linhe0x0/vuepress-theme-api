@@ -73,7 +73,7 @@ export default {
     },
   },
   watch: {
-    $route: function() {
+    $route() {
       this.isMenuOpened = false
     },
   },

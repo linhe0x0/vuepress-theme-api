@@ -89,7 +89,7 @@ export default {
       this.openLoading()
 
       request(options)
-        .then(data => {
+        .then((data) => {
           this.closeLoading()
 
           this.$message.success(
@@ -103,7 +103,7 @@ export default {
           console.info('<=', data.status, data.statusText)
           console.info('<=', 'data:', data.data)
         })
-        .catch(err => {
+        .catch((err) => {
           this.closeLoading()
 
           this.$message.error(`${err.status} ${err.message}`)

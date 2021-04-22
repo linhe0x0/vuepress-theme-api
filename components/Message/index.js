@@ -17,7 +17,7 @@ const getMessageContainerElement = () => {
   return el
 }
 
-const Message = options => {
+const Message = (options) => {
   if (options === undefined) return
 
   const opts =
@@ -36,8 +36,8 @@ const Message = options => {
   return vm
 }
 
-typeList.forEach(type => {
-  Message[type] = options => {
+typeList.forEach((type) => {
+  Message[type] = (options) => {
     const opts = typeof options === 'string' ? { message: options } : options
 
     opts.type = type

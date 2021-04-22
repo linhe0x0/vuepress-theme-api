@@ -6,7 +6,7 @@ import {
   matchLocalePathFromPath,
 } from './path'
 
-const getTopLevelOfHeaders = headers => {
+const getTopLevelOfHeaders = (headers) => {
   if (!headers.length) return -1
 
   let result = headers[0].level
@@ -30,13 +30,13 @@ export function getDirTree($site, $localePath) {
   }
 
   $site.pages
-    .filter(item => {
+    .filter((item) => {
       // Only show current locales in sidebar
       return $site.locales
         ? matchLocalePathFromPath(item.path, $site.locales) === $localePath
         : true
     })
-    .forEach(item => {
+    .forEach((item) => {
       if (isHomePage(item.path, $localePath)) {
         sidebars['home'] = {
           title: item.title,
@@ -66,13 +66,13 @@ export function getDirTree($site, $localePath) {
         sidebars[groupName].title = item.title
         sidebars[groupName].to = item.path
         sidebars[groupName].headers = item.headers.filter(
-          item => item.level === maxLevel
+          (item) => item.level === maxLevel
         )
       } else {
         sidebars[groupName].children.push({
           title: item.title || matchFileName(item.path),
           to: item.path,
-          headers: item.headers.filter(item => item.level === maxLevel),
+          headers: item.headers.filter((item) => item.level === maxLevel),
         })
       }
     })

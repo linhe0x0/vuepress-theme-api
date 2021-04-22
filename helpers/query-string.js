@@ -1,7 +1,7 @@
 export function parse(str) {
   const result = {}
 
-  str.split('&').forEach(item => {
+  str.split('&').forEach((item) => {
     const [attr, rawValue] = item.split('=')
 
     let value
