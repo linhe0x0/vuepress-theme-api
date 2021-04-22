@@ -208,7 +208,7 @@ curl -X GET https://api.github.com/users/sqrthree
 | :---------: | :-----: | :--------------------------------: | :------: |
 |    theme    | String  | 主题颜色，可选值有 `dark | light`   | `"dark"` |
 |   center    | Boolean |            内容是否居中            |  `true`  |
-| enhanceMode | Boolean |          是否启用增强模式          |  `true`  |
+| enhancedMode | Boolean |          是否启用增强模式          |  `true`  |
 
 ::: tip 增强模式
 增强模式是指该 `Section` 组件突破父级元素宽度限制，达到和浏览器窗口宽度一致的效果。

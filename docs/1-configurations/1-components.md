@@ -209,7 +209,7 @@ The `Section` component is a special layout form, mainly used in [Homepage Layou
 | :---------: | :-----: | :------------------------------------------: | :------: |
 |    theme    | String  |        Set the theme `dark \| light`         | `"dark"` |
 |   center    | Boolean | The specify which way that content is aligned |  `true`  |
-| enhanceMode | Boolean |       Whether to enable enhanced mode        |  `true`  |
+| enhancedMode | Boolean |       Whether to enable enhanced mode        |  `true`  |
 
 ::: tip Enhanced mode
 Enhanced mode means that the `Section` component breaks through the limit of the parent element width and achieves the same effect as the width of the browser window.

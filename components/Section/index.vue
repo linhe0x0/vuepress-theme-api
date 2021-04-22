@@ -27,13 +27,17 @@ export default {
       type: Boolean,
       default: true,
     },
+    enhancedMode: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     isHomepage() {
       return this.$page.frontmatter.home
     },
     classes() {
-      const { theme, center, enhanceMode } = this
+      const { theme, center } = this
 
       return [
         'section',
@@ -45,7 +49,7 @@ export default {
     },
   },
   mounted() {
-    if (this.enhanceMode) {
+    if (this.enhanceMode || this.enhancedMode) {
       this.enhance()
     }
   },
