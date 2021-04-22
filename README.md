@@ -34,10 +34,10 @@ There are some global dependencies you need to set up.
 
 ```bash
 # Install VuePress
-yarn global add vuepress # OR npm install -g vuepress
+yarn add vuepress # OR npm install vuepress
 
 # Install theme
-yarn global add vuepress-theme-api # OR npm install -g vuepress-theme-api
+yarn add vuepress-theme-api # OR npm install vuepress-theme-api
 ```
 
 ### Configuration
