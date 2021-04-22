@@ -51,10 +51,10 @@ title: 文档标题
 
 ### Parameters
 
-| Name | Type | Description | Required |
-| :-: | :-: | :-: | :-: |
-| 必选参数 | String |  | :heavy_check_mark: |
-| 可选参数 | String |  | :heavy_minus_sign: |
+|   Name   |  Type  | Description |      Required      |
+| :------: | :----: | :---------: | :----------------: |
+| 必选参数 | String |             | :heavy_check_mark: |
+| 可选参数 | String |             | :heavy_minus_sign: |
 
 ### Response
 

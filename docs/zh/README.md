@@ -10,7 +10,7 @@ footer: Open Source on [GitHub](https://github.com/sqrthree/vuepress-theme-api),
 ## 1、2、3 很简单
 
 ```bash
-# 安装 vuepress
+# 安装 VuePress
 yarn global add vuepress # OR npm install -g vuepress
 
 # 安装主题

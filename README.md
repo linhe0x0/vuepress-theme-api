@@ -33,7 +33,7 @@ There are some global dependencies you need to set up.
 ### Installing
 
 ```bash
-# Install vuepress
+# Install VuePress
 yarn global add vuepress # OR npm install -g vuepress
 
 # Install theme

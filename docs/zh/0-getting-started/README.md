@@ -9,7 +9,7 @@
 
 ## 环境依赖
 
-在开始使用本主题之前，请确保安装有以上环境。
+在开始使用本主题之前，请确保安装有以下环境：
 
 - [Node.js](https://nodejs.org/)
 - [VuePress](https://github.com/vuejs/vuepress)
@@ -18,7 +18,7 @@
 如果你已经有了 [Node.js](https://nodejs.org/) 环境，可以通过以下命令安装 `VuePress` 和 `vuepress-theme-api`。
 
 ```bash
-# 安装 vuepress
+# 安装 VuePress
 yarn global add vuepress # OR npm install -g vuepress
 
 # 安装主题

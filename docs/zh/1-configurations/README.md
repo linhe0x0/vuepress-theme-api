@@ -3,7 +3,9 @@ title: '基本配置'
 ---
 
 <Block>
+
 # 基本配置
+
 </Block>
 
 <Block>
@@ -36,7 +38,7 @@ module.exports = {
 
 但仍然提供了一些基本的配置项用于个性化配置，这些配置并不是必须的。
 
-参考 [VuePress | 配置](https://vuepress.vuejs.org/zh/config/#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE) 来查看 `VuePress` 支持的基本配置项。所有 `VuePress` 文档中的支持的基本配置在本主题中同样适用。
+参考 [VuePress | 配置](https://vuepress.vuejs.org/zh/config/) 来查看 `VuePress` 支持的基本配置项。所有 `VuePress` 文档中的支持的基本配置在本主题中同样适用。
 
 </Block>
 
@@ -311,7 +313,7 @@ themeConfig: {
 
 ## 页面布局
 
-文档页默认采用普通形式（通栏）的布局结构，例如 [起步页面](/zh/getting-started/)。同时得益于 `VuePress` 的 [组件支持特性](https://vuepress.vuejs.org/zh/guide/using-vue.html#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84-api-%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6)，我们可以在 Markdown 文件中直接使用 Vue 组件。因此，我们可以轻松构造出本页面这种 `RESTful API` 友好的页面布局。
+文档页默认采用普通形式（通栏）的布局结构，例如 [起步页面](/zh/0-getting-started/)。同时得益于 `VuePress` 的 [组件支持特性](https://vuepress.vuejs.org/zh/guide/using-vue.html)，我们可以在 Markdown 文件中直接使用 Vue 组件。因此，我们可以轻松构造出本页面这种 `RESTful API` 友好的页面布局。
 
 要使用这种布局，需要了解主题内提供的几个组件。具体使用方式请参考 [内置组件](/zh/configurations/components.html)。
 
@@ -343,7 +345,7 @@ enhance: true
 
 ## 多语言配置
 
-主题支持 `VuePress` 配置文件中的多语言配置。具体配置项请参考 [VuePress | 多语言支持](https://vuepress.vuejs.org/zh/guide/i18n.html#%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81)。
+主题支持 `VuePress` 配置文件中的多语言配置。具体配置项请参考 [VuePress | 多语言支持](https://vuepress.vuejs.org/zh/guide/i18n.html)。
 
 ::: tip 扩展字段
 我们在 `VuePress` 标准配置中扩展了 `text` 字段，作为左侧导航栏中对应语言的标识。如果该字段不存在，则自动降级使用 `lang` 字段的值。
