@@ -23,7 +23,6 @@
   },
   "main": "index.js",
   "scripts": {
-    "link": "npm link && npm link vuepress-theme-api",
     "dev": "npm run docs:dev",
     "docs:dev": "vuepress dev docs --no-cache",
     "docs:build": "vuepress build docs",
