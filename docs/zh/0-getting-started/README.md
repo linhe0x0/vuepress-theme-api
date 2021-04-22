@@ -31,7 +31,7 @@ yarn global add vuepress-theme-api # OR npm install -g vuepress-theme-api
 
 ## 应用主题
 
-`VuePress` 默认情况下将会使用自带的默认主题，因此我们需要在 `.vuepress/config.js` 中配置 theme 选项指定为 `vuepress-theme-api` 来应用主题。更多详情请参考 [VuePress | 自定义主题](https://vuepress.vuejs.org/zh/guide/custom-themes.html#%E4%BD%BF%E7%94%A8%E6%9D%A5%E8%87%AA-npm-%E7%9A%84%E4%B8%BB%E9%A2%98)。
+`VuePress` 默认情况下将会使用自带的默认主题，因此我们需要在 `.vuepress/config.js` 中配置 theme 选项指定为 `vuepress-theme-api` 来应用主题。更多详情请参考 [VuePress | 自定义主题](https://vuepress.vuejs.org/zh/theme/using-a-theme.html)。
 
 ```js{5}
 // .vuepress/config.js

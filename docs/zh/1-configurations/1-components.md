@@ -109,7 +109,6 @@ curl -X POST http://api.example.com/api/auth/login \
 
 </Example>
 
-
 例如：
 
 ````vue
@@ -131,6 +130,8 @@ curl -X GET https://api.github.com/users/sqrthree
 </CURL>
 
 </Example>
+
+另外，右侧的 `curl` 内容是可以直接编辑然后发送请求的，修改会立即生效，这在你想要临时想要修改一些参数的时候非常有用。
 
 </Block>
 

@@ -12,7 +12,7 @@ title: '基本配置'
 
 `VuePress` 项目必要的配置文件是 `.vuepress/config.js`。
 
-参考 [VuePress | 配置文件](https://vuepress.vuejs.org/zh/guide/basic-config.html#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6) 来查看详细信息。
+参考 [VuePress | 配置文件](https://vuepress.vuejs.org/zh/guide/basic-config.html) 来查看详细信息。
 
 <Example>
 
@@ -86,7 +86,7 @@ footer: Open Source on [GitHub](https://github.com/sqrthree/vuepress-theme-api),
 - 如果目录下有 `README.md` 文件，则读取其标题作为该分组下第一个导航项。如果文件 `YAML front matter` 中配置了 `title` 项，会采用其值作为标题，否则分析出文章中的第一个标题作为文章标题。如果存在该文件但未配置其标题，则降级为文件目录作为其标题；
 - 分析出文章中的所有最 `top` 级标题，作为该分组的导航项；
 - 检索该目录下的其他文件，作为该分组的剩余导航项；
-- 分析文件中的最 `top` 级标题，做为该文件对应的导航项中的子导航项（默认折叠）。
+- 分析其他文件中的最 `top` 级标题，做为该文件对应的导航项中的子导航项（默认折叠）。
 
 ### 自定义侧边栏顺序
 
@@ -363,7 +363,7 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'Hello, World.',
-      text: 'english',
+      text: 'English',
       description: '📦 🎨 A api-friendly theme for VuePress.',
     },
     '/zh/': {
