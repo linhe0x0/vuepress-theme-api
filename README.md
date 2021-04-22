@@ -14,7 +14,7 @@
 
 [Live demo](https://blog.sqrtthree.com/vuepress-theme-api/)
 
-![image](https://user-images.githubusercontent.com/8622362/40341249-9b6e8b9e-5db6-11e8-97f5-41cadc87ce51.png)
+[![image](https://user-images.githubusercontent.com/8622362/40341249-9b6e8b9e-5db6-11e8-97f5-41cadc87ce51.png)](https://github.com/sqrthree/vuepress-theme-api-starter-kit)
 
 ## Built With
 
