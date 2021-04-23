@@ -1,9 +1,3 @@
-> v1.0.0 is beta, going to release in the next few days.
->
-> All planned features have been implemented. The documents will be updated in the next few days.
-
----
-
 # vuepress-theme-api
 
 [![npm](https://img.shields.io/npm/v/vuepress-theme-api.svg)](https://www.npmjs.com/package/vuepress-theme-api)
