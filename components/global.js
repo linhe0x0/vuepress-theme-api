@@ -28,6 +28,9 @@ const install = (Vue) => {
     Vue.component(component.name, component)
   })
 
+  // <API> is the alias of <Block> component.
+  Vue.component('API', Block)
+
   Vue.prototype.$message = Message
 }
 

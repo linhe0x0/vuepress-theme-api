@@ -22,7 +22,6 @@ Currently, the following components are mainly built-in:
 
 ## Block Component
 
-
 The `Block` component is mainly used to divide the page structure. Each `Block` component is a content group. It is convenient for you to control the page structure freely and flexibly.
 
 <Example>
@@ -35,6 +34,30 @@ Usage:
 Contents...
 
 </Block>
+```
+
+</Example>
+
+</Block>
+
+<Block>
+
+## API Component
+
+The `API` component is the alias of `<Block>` component.
+
+<Example>
+
+Usage:
+
+```vue
+<API>
+
+## Endpoint
+
+GET https://api.github.com/users/:username
+
+</API>
 ```
 
 </Example>
