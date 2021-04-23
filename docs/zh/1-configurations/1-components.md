@@ -42,6 +42,30 @@ Contents...
 
 <Block>
 
+## API 组件
+
+`API` 组件是 `<Block>` 组件的一个别名，效果跟 `<Block>` 组件是一样的，只是在特殊场景下语义化更好。
+
+<Example>
+
+使用方式：
+
+```vue
+<API>
+
+## Endpoint
+
+GET https://api.github.com/users/:username
+
+</API>
+```
+
+</Example>
+
+</Block>
+
+<Block>
+
 ## Example 组件
 
 `Example` 组件用于在 `<Block>` 组件中指定右侧深色区域的内容。可以清晰地标识当前部分内容为使用案例。
