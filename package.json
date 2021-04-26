@@ -32,6 +32,9 @@
     "deploy": "npm run docs:build && gh-pages -d docs/.vuepress/dist",
     "test": "prettier --check '**/*.{js,vue}'"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "license": "MIT",
   "dependencies": {
     "@vuepress/plugin-active-header-links": "~1.8.2",
