@@ -1,7 +1,7 @@
 {
   "name": "vuepress-theme-api",
   "description": "A api-friendly theme for VuePress.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "sqrtthree <imsqrtthree@gmail.com>",
   "homepage": "https://github.com/sqrthree/vuepress-theme-api#readme",
   "keywords": [
