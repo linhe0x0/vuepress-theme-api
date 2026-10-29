@@ -67,9 +67,3 @@ Go to [docs](https://blog.sqrtthree.com/vuepress-theme-api/) to get more details
 ## Starter kit
 
 A out-of-the-box starter kit for RESTful API document is [here](https://github.com/sqrthree/vuepress-theme-api-starter-kit).
-
----
-
-> [sqrtthree.com](http://sqrtthree.com/) &nbsp;&middot;&nbsp;
-> GitHub [@sqrthree](https://github.com/sqrthree) &nbsp;&middot;&nbsp;
-> Twitter [@sqrtthree](https://twitter.com/sqrtthree)
